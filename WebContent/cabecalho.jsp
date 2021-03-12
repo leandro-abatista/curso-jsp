@@ -35,6 +35,7 @@
 			<li><a href="#" class="cad">Cadastro<span class="material-icons seta1">arrow_right</span></a>
 				<ul class="itens">
 					<li><a href="usuarioServlet?acao=listarTodos">Usuários</a></li>
+					<li><a href="fornecedorServlet?acao=listarTodos">Fornecedores</a></li>
 				</ul>
 			</li>
 			

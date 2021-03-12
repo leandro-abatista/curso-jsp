@@ -130,6 +130,7 @@ table {
 	width: 100%;
 	margin: 50px auto;
 	table-layout: fixed;
+	overflow-x: auto;
 }
 
 caption{
@@ -176,15 +177,21 @@ td:last-child {
 
 .botao {
 	background: #FF8C69;
-	border-radius: 5px;
-	padding: 6px;
+	border-radius: 4px;
 	color: #00008B;
 	cursor: pointer;
-	vertical-align: middle;
-	margin-top: -4px;
 	margin-right: 5px;
 	text-decoration: none;
+	padding: 6px;
+	height: 20px;
 }
+
+.botao span{
+	font-size: 28px;
+	text-align: center;
+	line-height: 20px;
+}
+
 
 .edit:hover {
 	color: #0a79df;
