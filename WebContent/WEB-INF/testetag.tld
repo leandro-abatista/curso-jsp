@@ -1,0 +1,14 @@
+<taglib>
+     <tlib-version>1.0</tlib-version>
+     <jsp-version>2.0</jsp-version>
+     <short-name>MinhasTags</short-name>
+     <info>Minhas Tag's Customizadas</info>
+     
+     <tag>
+          <name>minhatag</name>
+          <tag-class>tagPersonalizada.TagCursoJsp</tag-class>
+          <body-content>empty</body-content>
+          <info>Mostra a tag criada</info>
+     </tag>
+     
+</taglib>

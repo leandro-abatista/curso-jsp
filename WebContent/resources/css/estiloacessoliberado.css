@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+body{
+	background-image: url("../img/fundo.png");
+}
+
+.div-h2{
+	background: #363636;
+	height: 80px;
+}
+
+.div-h2 h2 {
+	margin-left: 80px;
+	line-height: 80px;
+	color: white;
+}
