@@ -2,8 +2,12 @@
  * 
  */
 
-$('.cad').click(function(){
-	$('.menulateral ul .itens').toggleClass('mostra');
+$('.cadastros').click(function(){
+	$('.menulateral ul .itensCadastros').toggleClass('mostra');
+});
+
+$('.sair').click(function(){
+	$('.menulateral ul .itenSair').toggleClass('mostra');
 });
 
 
@@ -28,11 +32,17 @@ $('.btnFecha').click(function(){
  * apos clicar, vira a seta 90 graus
  * @returns
  */
-$('.cad').click(function(){
+$('.cadastros').click(function(){
 	$('.menulateral ul .seta1').toggleClass('gira');
-})
+});
 
+$('.sair').click(function(){
+	$('.menulateral ul .seta7').toggleClass('gira');
+});
 
+/**
+ * esse bloco executa a ação de fechar o menu, após clicar em qualquer parte da página
+ */
 const $menulateral = $('.menulateral');
 $(document).mouseup(e => {
 	if (!$menulateral.is(e.target)
@@ -41,6 +51,8 @@ $(document).mouseup(e => {
 		$menulateral.removeClass('mostra');
 	}
 });
+
+
 
 
 

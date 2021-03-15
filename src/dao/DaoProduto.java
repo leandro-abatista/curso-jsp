@@ -102,7 +102,7 @@ public class DaoProduto {
 			
 			String sql = "UPDATE public.produto" + 
 					"   SET nome=?, valor=?, quantidade=?, datacadastro=?" + 
-					" 	WHERE codigo = '" + produtoBean.getCodigo() + "';";
+					" 	WHERE codigo = '" + produtoBean.getCodigo() + "'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, produtoBean.getNome());
 			ps.setDouble(2, produtoBean.getValor());

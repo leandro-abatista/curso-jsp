@@ -27,7 +27,7 @@
   			<h3>${mensagem}</h3>
 		</div>
 		
-		<form class="form" action="fornecedorServlet" method="post">
+		<form class="form" action="produtoServlet" method="post">
 		
 			<fieldset>
 			
@@ -35,7 +35,7 @@
 				
 					<div class="campo">
 						<label for="codigo">Código</label>
-						<input id="codigo" type="text" id="codigo" name="codigo" value="${forn.codigo}" readonly="readonly"
+						<input id="codigo" type="text" id="codigo" name="codigo" value="${prod.codigo}" readonly="readonly"
 						style="width: 10em;">
 					</div>	
 				
@@ -45,7 +45,7 @@
 				
 					<div class="campo">
 						<label for="nome">Item</label>
-						<input id="nome" type="text" name="nome" value="${forn.nome}" required="required"
+						<input id="nome" type="text" name="nome" value="${prod.nome}" 
 						style="width: 30em;">
 					</div>	
 					
@@ -55,13 +55,13 @@
 				
 					<div class="campo">
 						<label for="valor">Valor</label>
-						<input id="valor" type="text" name="valor" value="${forn.valor}" required="required"
-						style="width: 10em;">
+						<input id="valor" type="text" name="valor" value="${prod.valor}" required="required"
+						style="width: 10em;" onkeypress="$(this).mask('###.###.##0,00', {reverse: true});">
 					</div>	
 					
 					<div class="campo">
 						<label for="quantidade">Quantidade</label>
-						<input id="quantidade" type="number" name="quantidade" value="${forn.quantidade}" required="required"
+						<input id="quantidade" type="number" name="quantidade" value="${prod.quantidade}" required="required"
 						style="width: 8em;" min="1" max="1000">
 					</div>
 					
@@ -71,7 +71,7 @@
 					
 					<div class="campo">
 						<label for="datacadastro">Data de Cadastro</label>
-						<input id="datacadastro" type="date" name="datacadastro" value="${forn.dataCadastro}" required="required"
+						<input id="datacadastro" type="date" name="datacadastro" value="${prod.dataCadastro}" required="required"
 						style="width: 12em;" pattern="dd/MM/yyyy" >
 					</div>	
 				
@@ -97,7 +97,7 @@
 				<th width="15%">VALOR</th>
 				<th width="15%">ESTOQUE</th>
 				<th width="15%">DATA DE CADASTRO</th>
-				<th style="text-align: center;">AÇÃO</th>
+				<th align="center" width="8%">AÇÃO</th>
 			</tr>
 		</thead>
 			
@@ -106,20 +106,20 @@
 				<tr>
 					<td width="8%"><c:out value="${prod.codigo}"/></td>
 					<td width="30%"><c:out value="${prod.nome}"/></td>
-					<td width="15%"><c:out value="${prod.valor}"/></td>
+					<td width="15%"><fmt:formatNumber value="${prod.valor}" pattern="#,#00.00"/></td>
 					<td width="15%"><c:out value="${prod.quantidade}"/></td>
 					<td width="15%"><fmt:formatDate value="${prod.dataCadastro}" pattern="dd-MM-yyyy" /></td>
 					
-					<td >
-						<a id="edit" class="botao edit" href="fornecedorServlet?acao=update&forn=${prod.codigo}">
+					<td align="center" width="8%">
+						<a id="edit" class="botao edit" href="produtoServlet?acao=update&prod=${prod.codigo}">
 							<span class="material-icons">
 								edit
 							</span>
 						</a>
 						
-						<a id="delete" class="botao delete" href="fornecedorServlet?acao=delete&forn=${prod.codigo}">
+						<a id="delete" class="botao delete" href="produtoServlet?acao=delete&prod=${prod.codigo}">
 							<span class="material-icons">
-								delete_sweep
+								delete
 							</span>
 						</a>
 					</td>
@@ -136,6 +136,8 @@
 	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
 		  $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
 		});
+
+	
 	</script>
 	
 </body>

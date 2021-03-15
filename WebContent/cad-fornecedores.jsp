@@ -12,6 +12,10 @@
 
 <title>curso-jsp</title>
 
+<!-- Adicionando JQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="resources/css/estilocad.css">
 </head>
@@ -21,13 +25,13 @@
 	<jsp:include page="cabecalho.jsp"/>
 	
 	<div class="div-pai">
-		<p>Cadastro de Fornecedor</p>
+		<p>Dados do Fornecedor</p>
 		
 		<div id="msg" class="msg">
   			<h3>${mensagem}</h3>
 		</div>
 		
-		<form class="form" action="fornecedorServlet" method="post">
+		<form class="form" action="fornecedorServlet" method="post" onsubmit="return validarCampos() ? true : false;">
 		
 			<fieldset>
 			
@@ -89,7 +93,57 @@
 				
 				</fieldset>
 				
+				<p>Dados do Endereço</p>
+				
+				<fieldset class="grupo">
 					
+					<div class="campo">
+						<label for="cep">CEP</label>
+						<input id="cep" type="text" name="cep" value="${forn.dataCadastro}" required="required"
+						style="width: 8em;" onblur="consultarCep();">
+					</div>	
+					
+					<div class="campo">
+						<label for="logradouro">Logradouro</label>
+						<input id="logradouro" type="text" name="logradouro" value="${forn.dataCadastro}" required="required"
+						style="width: 30em;">
+					</div>
+					
+					<div class="campo">
+						<label for="numero">Número</label>
+						<input id="numero" type="text" name="numero" value="${forn.dataCadastro}" required="required"
+						style="width: 8em;">
+					</div>
+				
+				</fieldset>
+				
+				<fieldset class="grupo">
+					
+					<div class="campo">
+						<label for="bairro">Bairro</label>
+						<input id="bairro" type="text" name="bairro" value="${forn.dataCadastro}" required="required"
+						style="width: 15em;">
+					</div>
+					
+					<div class="campo">
+						<label for="cidade">Cidade</label>
+						<input id="cidade" type="text" name="cidade" value="${forn.dataCadastro}" required="required"
+						style="width: 20em;">
+					</div>
+					
+					<div class="campo">
+						<label for="estado">Estado</label>
+						<input id="estado" type="text" name="estado" value="${forn.dataCadastro}" required="required"
+						style="width: 5em;">
+					</div>
+					
+					<div class="campo">
+						<label for="ibge">IBGE</label>
+						<input id="ibge" type="text" name="ibge" value="${forn.dataCadastro}" required="required"
+						style="width: 10em;">
+					</div>
+					
+				</fieldset>
 			</fieldset>
 			
 			
@@ -109,7 +163,7 @@
 				<th width="15%">CNPJ</th>
 				<th width="15%">INSC. ESTADUAL</th>
 				<th width="15%">DATA DE CADASTRO</th>
-				<th style="text-align: center;">AÇÃO</th>
+				<th align="center" width="8%">AÇÃO</th>
 			</tr>
 		</thead>
 			
@@ -122,7 +176,7 @@
 					<td width="15%"><c:out value="${forn.inscricaoEstadual}"/></td>
 					<td width="15%"><fmt:formatDate value="${forn.dataCadastro}" pattern="dd-MM-yyyy" /></td>
 					
-					<td >
+					<td align="center" width="8%">
 						<a id="edit" class="botao edit" href="fornecedorServlet?acao=update&forn=${forn.codigo}">
 							<span class="material-icons">
 								edit
@@ -131,7 +185,7 @@
 						
 						<a id="delete" class="botao delete" href="fornecedorServlet?acao=delete&forn=${forn.codigo}">
 							<span class="material-icons">
-								delete_sweep
+								delete
 							</span>
 						</a>
 					</td>
@@ -147,7 +201,53 @@
 	<script type="text/javascript">
 	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
 		  $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
-		});
+	});
+
+	function validarCampos() {
+		if (document.getElementById('razaosocial').value == '') {
+			alert('Informe o campo Razão Social');
+			return false;
+		} 
+
+		return true;
+	}
+
+	function consultarCep() {
+		var cep = $('#cep').val();
+
+
+		//Consulta o webservice viacep.com.br **consumindo o webservice/
+        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+            if (!("erro" in dados)) {
+                //Atualiza os campos com os valores da consulta.
+                $("#logradouro").val(dados.logradouro);
+                $("#numero").val(dados.numero);
+                $("#bairro").val(dados.bairro);
+                $("#cidade").val(dados.localidade);
+                $("#estado").val(dados.uf);
+                $("#ibge").val(dados.ibge);
+            } //end if.
+            else {
+
+				$("#cep").val('');
+            	$("#logradouro").val('');
+                $("#numero").val('');
+                $("#bairro").val('');
+                $("#cidade").val('');
+                $("#estado").val('');
+                $("#ibge").val('');
+                
+              	//CEP pesquisado não foi encontrado.
+	            alert("CEP não encontrado.");
+
+	            $('#cep').focus();
+	            
+            	}
+        });
+    
+	}
+
 	</script>
 	
 </body>

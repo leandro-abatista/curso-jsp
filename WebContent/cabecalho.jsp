@@ -12,10 +12,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   
   <!-- meu proprio estilo -->
 <link rel="stylesheet" type="text/css" href="resources/css/estilocabecalho.css">
@@ -32,10 +29,11 @@
 			
 			<li><a href="acessoliberado.jsp" class="cad1">Home</a></li>
 		
-			<li><a href="#" class="cad">Cadastro<span class="material-icons seta1">arrow_right</span></a>
-				<ul class="itens">
+			<li><a href="#" class="cadastros">Cadastro<span class="material-icons seta1">arrow_right</span></a>
+				<ul class="itensCadastros">
 					<li><a href="usuarioServlet?acao=listarTodos">Usuários</a></li>
 					<li><a href="fornecedorServlet?acao=listarTodos">Fornecedores</a></li>
+					<li><a href="produtoServlet?acao=listarTodos">Produtos</a></li>
 				</ul>
 			</li>
 			
@@ -49,7 +47,11 @@
 			
 			<li><a href="#">Ajuda<span class="material-icons seta6">arrow_right</span></a></li>
 			
-			<li><a href="#">Sair<span class="material-icons seta7">arrow_right</span></a></li>
+			<li><a href="#" class="sair">Sair<span class="material-icons seta7">arrow_right</span></a>
+				<ul class="itenSair">
+					<li><a href="index.jsp">Deslogar</a></li>
+				</ul>
+			</li>
 			
 		</ul>
 		

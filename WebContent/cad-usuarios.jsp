@@ -11,8 +11,10 @@
 
 <title>curso-jsp</title>
 
-
 <link rel="stylesheet" href="resources/css/estilocad.css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 </head>
 
 <body>
@@ -77,7 +79,7 @@
 					<div class="campo">
 						<label for="telefone">Telefone</label>
 						<input id="telefone" type="text" name="telefone" value="${user.telefone}" required="required"
-						style="width: 20em;">
+						style="width: 20em;" onkeypress="$(this).mask('(99) 9.9999-9999')" maxlength="17">
 					</div>	
 					
 					<div class="campo">
@@ -103,27 +105,37 @@
 		<caption>Registros de Usuários Cadastrados</caption>
 		<thead>
 			<tr>
-				<th width="14%">CÓDIGO</th>
+				<th width="8%">CÓDIGO</th>
 				<th width="20%">LOGIN</th>
 				<th width="23%">NOME</th>
 				<th width="23%">E-MAIL</th>
-				<th style="text-align: center;">AÇÃO</th>
+				<th width="20%">TELEFONE</th>
+				<th align="center" width="8%">AÇÃO</th>
 			</tr>
 		</thead>
 			
 		<c:forEach items="${usuarios}" var="usuario">
 			<tbody>
 				<tr>
-					<td width="10%"><c:out value="${usuario.codigo}"/></td>
+					<td width="8%"><c:out value="${usuario.codigo}"/></td>
 					<td width="20%"><c:out value="${usuario.login}"/></td>
-					<td width="25%"><c:out value="${usuario.nome}"/></td>
-					<td width="25%"><c:out value="${usuario.email}"/></td>
+					<td width="23%"><c:out value="${usuario.nome}"/></td>
+					<td width="23%"><c:out value="${usuario.email}"/></td>
+					<td width="20%"><c:out value="${usuario.telefone}"/></td>
 					
-					<td >
-						<a id="edit" class="botao edit" href="usuarioServlet?acao=update&user=${usuario.codigo}">Atualizar</a>
+					<td align="center" width="8%">
+						<a id="edit" class="botao edit" href="usuarioServlet?acao=update&user=${usuario.codigo}">
+							<span class="material-icons">
+								edit
+							</span>
+						</a>
 						
 						<a id="delete" class="botao delete" href="usuarioServlet?acao=delete&user=${usuario.codigo}"
-						data-confirm="Tem certeza que deseja excluir o registro selecionado?">Excluir</a>
+						data-confirm="Tem certeza que deseja excluir o registro selecionado?">
+							<span class="material-icons">
+								delete
+							</span>
+						</a>
 					</td>
 				</tr>
 			</tbody>
@@ -133,11 +145,15 @@
 	
 	</div>
 	
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
 		  $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
-		});
+	});
+
+	
+	
 	</script>
 	
 </body>

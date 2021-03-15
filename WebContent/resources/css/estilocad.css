@@ -176,20 +176,19 @@ td:last-child {
 }
 
 .botao {
-	background: #FF8C69;
+	background: #C1CDCD;
 	border-radius: 4px;
 	color: #00008B;
 	cursor: pointer;
 	margin-right: 5px;
 	text-decoration: none;
-	padding: 6px;
-	height: 20px;
+	padding: 5px;
 }
 
-.botao span{
+.botao a span{
 	font-size: 28px;
 	text-align: center;
-	line-height: 20px;
+	margin: 5px;
 }
 
 

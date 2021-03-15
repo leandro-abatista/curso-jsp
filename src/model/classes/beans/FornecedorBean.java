@@ -15,6 +15,15 @@ public class FornecedorBean implements Serializable {
 	private String inscricaoMunicipal;
 	private Date dataCadastro;
 
+	// dados do endereço
+	private String cep;
+	private String logradouro;
+	private String numero;
+	private String bairro;
+	private String cidade;
+	private String estado;
+	private String ibge;
+
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -69,6 +78,62 @@ public class FornecedorBean implements Serializable {
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getIbge() {
+		return ibge;
+	}
+
+	public void setIbge(String ibge) {
+		this.ibge = ibge;
 	}
 
 }

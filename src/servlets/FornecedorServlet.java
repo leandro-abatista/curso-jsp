@@ -70,6 +70,16 @@ public class FornecedorServlet extends HttpServlet {
 		String inscricaoestadual = request.getParameter("inscricaoestadual");
 		String inscricaomunicipal = request.getParameter("inscricaomunicipal");
 		
+		//dados do endereço
+		String cep = request.getParameter("cep");
+		String logradouro = request.getParameter("logradouro");
+		String numero = request.getParameter("numero");
+		String bairro = request.getParameter("bairro");
+		String cidade = request.getParameter("cidade");
+		String estado = request.getParameter("estado");
+		String ibge = request.getParameter("ibge");
+		
+		
 		//criando uma nova instância do objeto fornecedor
 		FornecedorBean fornecedorBean = new FornecedorBean();
 		fornecedorBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
@@ -87,6 +97,14 @@ public class FornecedorServlet extends HttpServlet {
 			fornecedorBean.setDataCadastro(new Date());
 		}
 		
+		fornecedorBean.setCep(cep);
+		fornecedorBean.setLogradouro(logradouro);
+		fornecedorBean.setNumero(numero);
+		fornecedorBean.setBairro(bairro);
+		fornecedorBean.setCidade(cidade);
+		fornecedorBean.setEstado(estado);
+		fornecedorBean.setIbge(ibge);
+		
 		String mensagem = null;
 		boolean podeInserir = true;
 		
@@ -97,9 +115,9 @@ public class FornecedorServlet extends HttpServlet {
 		if (codigo == null || codigo.isEmpty() && daoFornecedor.verificarCnpj(cnpj) && podeInserir) {
 			daoFornecedor.salvar(fornecedorBean);
 			request.setAttribute("mensagem", "Cadastro efetuado com sucesso!");
-		} else {
+		} else if (codigo != null && !codigo.isEmpty() && podeInserir) {
 			daoFornecedor.update(fornecedorBean);
-			request.setAttribute("mensagem", "Cadastro atualizado com sucesso!");
+			request.setAttribute("mensagem", "Registro atualizado com sucesso!");
 		}
 		
 		if (!podeInserir) {
