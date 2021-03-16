@@ -15,13 +15,12 @@
 <!-- Adicionando JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-
-
 <link rel="stylesheet" href="resources/css/estilocad.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+
 </head>
 
 <body>
@@ -159,7 +158,6 @@
 		</form>
 		
 		<table class="table" cellpadding="0" cellspacing="0">
-		<caption>Registros de Fornecedores Cadastrados</caption>
 		<thead>
 			<tr>
 				<th width="8%">CÓDIGO</th>
@@ -183,20 +181,21 @@
 					<td width="15%"><c:out value="${forn.inscricaoEstadual}"/></td>
 					<td width="15%"><fmt:formatDate value="${forn.dataCadastro}" pattern="dd-MM-yyyy" /></td>
 					
-					<td align="center" width="15%">
+					<td align="right" width="15%">
 						<a type="button" id="edit" class="botao edit" href="fornecedorServlet?acao=update&forn=${forn.codigo}">
 							<span class="material-icons">
 								edit
 							</span>
 						</a>
 						
-						<a type="button" id="delete" class="botao delete" data-toggle="modal" data-target="#${forn.codigo}">
+						<a type="button" id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${forn.codigo}">
 							<span class="material-icons">
 								delete
 							</span>
 						</a>
 						
-						<a type="button" class="botao" data-toggle="modal" data-target="#${forn.codigo}">
+						<a type="button" class="botao" data-toggle="modal" data-target="#modalDet" 
+						href="fornecedorServlet?acao=visualizar&forn=${forn.codigo}">
 							<span class="material-icons">
 								assignment
 							</span>
@@ -207,41 +206,8 @@
 				</tr>
 				
 			</tbody>
-			
-			<!-- início modal -->
-			<div class="modal fade bd-example-modal-lg" 
-			id="${forn.codigo}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-						
-							<h5 class="modal-title text-center" id="exampleModalLabel">Dados Completos do Forncedor</h5>
-							
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							
-						</div>
-						
-						<div class="modal-body">
-							
-							<label id="label-1">Código: <c:out value="${forn.codigo}"/></label>
-							<br>
-							<label id="label-2">Razão Social: <c:out value="${forn.razaoSocial}"/></label>
-							
-							
-						</div>
-						
-						<div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-				      </div>
-						
-					</div>
-				</div>
-			</div>
-			<!-- fim modal -->
 
-			<!-- Modal de confirmação de exclusão de registro -->
+			<!-- Início Modal de confirmação de exclusão de registro -->
 			<div class="modal modal-danger fade" id="${forn.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog  modal-dialog-centered" role="document">
 					<div class="modal-content">
@@ -267,12 +233,46 @@
 					</div>
 				</div>
 			</div>
+			<!-- Fim do Modal de confirmação de exclusão de registro -->
 			
 		</c:forEach>
 		
 		</table>
 		
 	</div>
+	
+	<!-- início modal -->
+	<div class="modal fade bd-example-modal-lg" 
+		id="modalDet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+				
+					<div class="modal-header">
+						
+						<h5 class="modal-title text-center" id="exampleModalLabel">Dados Completos do Forncedor</h5>
+							
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+						</button>
+							
+					</div>
+						
+					<div class="modal-body">
+							
+						<label id="label-1">Código: <c:out value="${forn.codigo}"/></label>
+						<br>
+						<label id="label-2">Razão Social: <c:out value="${forn.razaoSocial}"/></label>
+							
+					</div>
+						
+					<div class="modal-footer">
+					     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+				    </div>
+						
+			</div>
+		</div>
+	</div>
+	<!-- fim modal -->
 	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

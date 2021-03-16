@@ -30,6 +30,7 @@ p{
     margin-left: 50%;
     border-radius: 3px;
     padding: 10px;
+    font-size: 20px;
 }
 
 fieldset {
@@ -197,4 +198,8 @@ td:last-child {
 
 .delete:hover {
 	color: #dc2a2a;
+}
+
+.addCall:hover {
+	color: #0a79df;
 }

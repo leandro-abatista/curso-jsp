@@ -18,7 +18,7 @@ public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private DaoUsuario daoUsuario = new DaoUsuario();
-       
+	
     public UsuarioServlet() {
         super();
     }
