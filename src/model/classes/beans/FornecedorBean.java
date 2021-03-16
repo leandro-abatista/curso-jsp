@@ -22,7 +22,7 @@ public class FornecedorBean implements Serializable {
 	private String bairro;
 	private String cidade;
 	private String estado;
-	private String ibge;
+	private Integer ibge;
 
 	public Long getCodigo() {
 		return codigo;
@@ -128,11 +128,11 @@ public class FornecedorBean implements Serializable {
 		this.estado = estado;
 	}
 
-	public String getIbge() {
+	public Integer getIbge() {
 		return ibge;
 	}
 
-	public void setIbge(String ibge) {
+	public void setIbge(Integer ibge) {
 		this.ibge = ibge;
 	}
 

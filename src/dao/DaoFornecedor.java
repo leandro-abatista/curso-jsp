@@ -38,7 +38,7 @@ public class DaoFornecedor {
 			ps.setString(10, fornecedorBean.getBairro());
 			ps.setString(11, fornecedorBean.getCidade());
 			ps.setString(12, fornecedorBean.getEstado());
-			ps.setString(13, fornecedorBean.getIbge());
+			ps.setInt(13, fornecedorBean.getIbge());
 			
 			ps.execute();
 			connection.commit();
@@ -80,7 +80,7 @@ public class DaoFornecedor {
 				fornecedorBean.setBairro(rs.getString("bairro"));
 				fornecedorBean.setCidade(rs.getString("cidade"));
 				fornecedorBean.setEstado(rs.getString("estado"));
-				fornecedorBean.setIbge(rs.getString("ibge"));
+				fornecedorBean.setIbge(rs.getInt("ibge"));
 				
 				listar.add(fornecedorBean);
 			}
@@ -117,7 +117,7 @@ public class DaoFornecedor {
 				fornecedorBean.setBairro(rs.getString("bairro"));
 				fornecedorBean.setCidade(rs.getString("cidade"));
 				fornecedorBean.setEstado(rs.getString("estado"));
-				fornecedorBean.setIbge(rs.getString("ibge"));
+				fornecedorBean.setIbge(rs.getInt("ibge"));
 				
 				return fornecedorBean;
 			}
@@ -149,7 +149,7 @@ public class DaoFornecedor {
 			ps.setString(10, fornecedorBean.getBairro());
 			ps.setString(11, fornecedorBean.getCidade());
 			ps.setString(12, fornecedorBean.getEstado());
-			ps.setString(13, fornecedorBean.getIbge());
+			ps.setInt(13, fornecedorBean.getIbge());
 			
 			ps.executeUpdate();
 			connection.commit();

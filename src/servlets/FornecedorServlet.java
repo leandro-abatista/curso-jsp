@@ -51,6 +51,15 @@ public class FornecedorServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		} else
+			
+		if (acao != null && acao.equalsIgnoreCase("visualizar")) {
+				FornecedorBean fornecedorBean = daoFornecedor.consultarCodigo(Long.parseLong(forn));
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-fornecedores.jsp");
+				request.setAttribute("forn", fornecedorBean);
+				dispatcher.forward(request, response);
+				
+		} else
 		
 		if (acao.equalsIgnoreCase("listarTodos")) {
 			
@@ -103,7 +112,7 @@ public class FornecedorServlet extends HttpServlet {
 		fornecedorBean.setBairro(bairro);
 		fornecedorBean.setCidade(cidade);
 		fornecedorBean.setEstado(estado);
-		fornecedorBean.setIbge(ibge);
+		fornecedorBean.setIbge(Integer.parseInt(ibge));
 		
 		String mensagem = null;
 		boolean podeInserir = true;

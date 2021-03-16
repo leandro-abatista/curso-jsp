@@ -13,11 +13,15 @@
 <title>curso-jsp</title>
 
 <!-- Adicionando JQuery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 
 <link rel="stylesheet" href="resources/css/estilocad.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 </head>
 
 <body>
@@ -99,19 +103,19 @@
 					
 					<div class="campo">
 						<label for="cep">CEP</label>
-						<input id="cep" type="text" name="cep" value="${forn.dataCadastro}" required="required"
+						<input id="cep" type="text" name="cep" value="${forn.cep}" required="required"
 						style="width: 8em;" onblur="consultarCep();">
 					</div>	
 					
 					<div class="campo">
 						<label for="logradouro">Logradouro</label>
-						<input id="logradouro" type="text" name="logradouro" value="${forn.dataCadastro}" required="required"
+						<input id="logradouro" type="text" name="logradouro" value="${forn.logradouro}" required="required"
 						style="width: 30em;">
 					</div>
 					
 					<div class="campo">
 						<label for="numero">Número</label>
-						<input id="numero" type="text" name="numero" value="${forn.dataCadastro}" required="required"
+						<input id="numero" type="text" name="numero" value="${forn.numero}" required="required"
 						style="width: 8em;">
 					</div>
 				
@@ -121,25 +125,25 @@
 					
 					<div class="campo">
 						<label for="bairro">Bairro</label>
-						<input id="bairro" type="text" name="bairro" value="${forn.dataCadastro}" required="required"
+						<input id="bairro" type="text" name="bairro" value="${forn.bairro}" required="required"
 						style="width: 15em;">
 					</div>
 					
 					<div class="campo">
 						<label for="cidade">Cidade</label>
-						<input id="cidade" type="text" name="cidade" value="${forn.dataCadastro}" required="required"
+						<input id="cidade" type="text" name="cidade" value="${forn.cidade}" required="required"
 						style="width: 20em;">
 					</div>
 					
 					<div class="campo">
 						<label for="estado">Estado</label>
-						<input id="estado" type="text" name="estado" value="${forn.dataCadastro}" required="required"
+						<input id="estado" type="text" name="estado" value="${forn.estado}" required="required"
 						style="width: 5em;">
 					</div>
 					
 					<div class="campo">
 						<label for="ibge">IBGE</label>
-						<input id="ibge" type="text" name="ibge" value="${forn.dataCadastro}" required="required"
+						<input id="ibge" type="text" name="ibge" value="${forn.ibge}" required="required"
 						style="width: 10em;">
 					</div>
 					
@@ -151,7 +155,7 @@
 			
 			<button class="btn submit" type="submit" value="cancelar"
 			onclick="history.go(0)">Cancelar</button>
-			
+
 		</form>
 		
 		<table class="table" cellpadding="0" cellspacing="0">
@@ -163,91 +167,165 @@
 				<th width="15%">CNPJ</th>
 				<th width="15%">INSC. ESTADUAL</th>
 				<th width="15%">DATA DE CADASTRO</th>
-				<th align="center" width="8%">AÇÃO</th>
+				<th align="center" width="15%">AÇÃO</th>
 			</tr>
 		</thead>
 			
 		<c:forEach items="${fornecedores}" var="forn">
+		
 			<tbody>
+			
 				<tr>
+				
 					<td width="8%"><c:out value="${forn.codigo}"/></td>
 					<td width="30%"><c:out value="${forn.razaoSocial}"/></td>
 					<td width="15%"><c:out value="${forn.cnpj}"/></td>
 					<td width="15%"><c:out value="${forn.inscricaoEstadual}"/></td>
 					<td width="15%"><fmt:formatDate value="${forn.dataCadastro}" pattern="dd-MM-yyyy" /></td>
 					
-					<td align="center" width="8%">
-						<a id="edit" class="botao edit" href="fornecedorServlet?acao=update&forn=${forn.codigo}">
+					<td align="center" width="15%">
+						<a type="button" id="edit" class="botao edit" href="fornecedorServlet?acao=update&forn=${forn.codigo}">
 							<span class="material-icons">
 								edit
 							</span>
 						</a>
 						
-						<a id="delete" class="botao delete" href="fornecedorServlet?acao=delete&forn=${forn.codigo}">
+						<a type="button" id="delete" class="botao delete" data-toggle="modal" data-target="#${forn.codigo}">
 							<span class="material-icons">
 								delete
 							</span>
 						</a>
+						
+						<a type="button" class="botao" data-toggle="modal" data-target="#${forn.codigo}">
+							<span class="material-icons">
+								assignment
+							</span>
+						</a>
+						
 					</td>
+					
 				</tr>
+				
 			</tbody>
+			
+			<!-- início modal -->
+			<div class="modal fade bd-example-modal-lg" 
+			id="${forn.codigo}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						
+							<h5 class="modal-title text-center" id="exampleModalLabel">Dados Completos do Forncedor</h5>
+							
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							
+						</div>
+						
+						<div class="modal-body">
+							
+							<label id="label-1">Código: <c:out value="${forn.codigo}"/></label>
+							<br>
+							<label id="label-2">Razão Social: <c:out value="${forn.razaoSocial}"/></label>
+							
+							
+						</div>
+						
+						<div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+				      </div>
+						
+					</div>
+				</div>
+			</div>
+			<!-- fim modal -->
+
+			<!-- Modal de confirmação de exclusão de registro -->
+			<div class="modal modal-danger fade" id="${forn.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog  modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+		
+							<h5 class="modal-title" id="TituloModalCentralizado">Confirmar exclusão</h5>
+		
+							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+								<span aria-hidden="true">&times;</span>
+							</button>
+		
+						</div>
+		
+						<div class="modal-body">
+							<h6>Deseja excluir o registro <c:out value="${forn.codigo}"/> ?</h6>
+						</div>
+		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<a type="submit" class="btn btn-warning" href="fornecedorServlet?acao=delete&forn=${forn.codigo}">Excluir</a>
+						</div>
+								
+					</div>
+				</div>
+			</div>
+			
 		</c:forEach>
-	
-	</table>
-	
+		
+		</table>
+		
 	</div>
 	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
-		  $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
-	});
+	
+		$(document).ready(function() { // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
+			$("div.msg").fadeIn(300).delay(2500).fadeOut(400);
+		});
 
-	function validarCampos() {
-		if (document.getElementById('razaosocial').value == '') {
-			alert('Informe o campo Razão Social');
-			return false;
-		} 
+		function validarCampos() {
+			if (document.getElementById('razaosocial').value == '') {
+				alert('Informe o campo Razão Social');
+				return false;
+			}
 
-		return true;
-	}
+			return true;
+		}
 
-	function consultarCep() {
-		var cep = $('#cep').val();
+		function consultarCep() {
+			var cep = $('#cep').val();
 
+			//Consulta o webservice viacep.com.br **consumindo o webservice/
+			$.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?",
+					function(dados) {
 
-		//Consulta o webservice viacep.com.br **consumindo o webservice/
-        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+						if (!("erro" in dados)) {
+							//Atualiza os campos com os valores da consulta.
+							$("#logradouro").val(dados.logradouro);
+							$("#numero").val(dados.numero);
+							$("#bairro").val(dados.bairro);
+							$("#cidade").val(dados.localidade);
+							$("#estado").val(dados.uf);
+							$("#ibge").val(dados.ibge);
+						} //end if.
+						else {
 
-            if (!("erro" in dados)) {
-                //Atualiza os campos com os valores da consulta.
-                $("#logradouro").val(dados.logradouro);
-                $("#numero").val(dados.numero);
-                $("#bairro").val(dados.bairro);
-                $("#cidade").val(dados.localidade);
-                $("#estado").val(dados.uf);
-                $("#ibge").val(dados.ibge);
-            } //end if.
-            else {
+							$("#cep").val('');
+							$("#logradouro").val('');
+							$("#numero").val('');
+							$("#bairro").val('');
+							$("#cidade").val('');
+							$("#estado").val('');
+							$("#ibge").val('');
 
-				$("#cep").val('');
-            	$("#logradouro").val('');
-                $("#numero").val('');
-                $("#bairro").val('');
-                $("#cidade").val('');
-                $("#estado").val('');
-                $("#ibge").val('');
-                
-              	//CEP pesquisado não foi encontrado.
-	            alert("CEP não encontrado.");
+							//CEP pesquisado não foi encontrado.
+							alert("CEP não encontrado.");
 
-	            $('#cep').focus();
-	            
-            	}
-        });
-    
-	}
+							$('#cep').focus();
 
+						}
+					});
+
+		}
 	</script>
 	
 </body>
