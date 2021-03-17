@@ -36,7 +36,8 @@ public class TelefoneServlet extends HttpServlet {
 		//aqui estou captando o usuário da sessão
 		String user = request.getParameter("user");
 		
-		if (user != null) {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-telefones.jsp");
+		
 			if (acao != null && acao.equalsIgnoreCase("addTel")) {
 				UsuarioBean usuarioBean = daoUsuario.consultarCodigo(Long.parseLong(user));
 				
@@ -49,9 +50,7 @@ public class TelefoneServlet extends HttpServlet {
 				request.getSession().setAttribute("nomeUser", usuarioBean.getNome());
 				*/
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-telefones.jsp");
 				request.setAttribute("telefones", daoTelefone.listarTodosTelefones(usuarioBean.getCodigo()));
-				dispatcher.forward(request, response);
 				
 			} else 
 				
@@ -63,21 +62,16 @@ public class TelefoneServlet extends HttpServlet {
 				
 				UsuarioBean usuarioBean = (UsuarioBean) request.getSession().getAttribute("userSelecionado");
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-telefones.jsp");
 				request.setAttribute("telefones", daoTelefone.listarTodosTelefones(usuarioBean.getCodigo()));
-				dispatcher.forward(request, response);
 				
 			} else {
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-usuarios.jsp");
+				RequestDispatcher dispatcherUser = request.getRequestDispatcher("/cad-usuarios.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarTodosUsuarios());
-				dispatcher.forward(request, response);
-				
+				dispatcherUser.forward(request, response);
 			}
-		}
-		
-		
-		
+			
+			dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -103,11 +97,11 @@ public class TelefoneServlet extends HttpServlet {
 			request.getSession().setAttribute("userSelecionado", usuarioBean);
 			request.setAttribute("userSelecionado", usuarioBean);
 			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-telefones.jsp");
+			request.setAttribute("telefones", daoTelefone.listarTodosTelefones(usuarioBean.getCodigo()));
+			dispatcher.forward(request, response);
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-telefones.jsp");
-		request.setAttribute("telefones", daoTelefone.listarTodosTelefones(usuarioBean.getCodigo()));
-		dispatcher.forward(request, response);
 		
 	}
 

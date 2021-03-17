@@ -13,9 +13,8 @@
 
 <link rel="stylesheet" href="resources/css/estilocad.css">
 
-
+<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 
@@ -109,11 +108,11 @@
 		<thead>
 			<tr>
 				<th width="8%">CÓDIGO</th>
-				<th width="20%">LOGIN</th>
+				<th width="18%">LOGIN</th>
 				<th width="23%">NOME</th>
 				<th width="23%">E-MAIL</th>
-				<th width="20%">TELEFONE</th>
-				<th align="center" width="15%">AÇÃO</th>
+				<th width="18%">TELEFONE</th>
+				<th align="center" width="12%">AÇÃO</th>
 			</tr>
 		</thead>
 			
@@ -124,12 +123,12 @@
 				<tr>
 				
 					<td width="8%"><c:out value="${usuario.codigo}"/></td>
-					<td width="20%"><c:out value="${usuario.login}"/></td>
+					<td width="18%"><c:out value="${usuario.login}"/></td>
 					<td width="23%"><c:out value="${usuario.nome}"/></td>
 					<td width="23%"><c:out value="${usuario.email}"/></td>
-					<td width="20%"><c:out value="${usuario.telefone}"/></td>
+					<td width="18%"><c:out value="${usuario.telefone}"/></td>
 					
-					<td align="center" width="15%">
+					<td align="center" width="12%">
 						<a id="edit" class="botao edit" href="usuarioServlet?acao=update&user=${usuario.codigo}">
 							<span class="material-icons">
 								edit

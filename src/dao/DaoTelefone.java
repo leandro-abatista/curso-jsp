@@ -40,12 +40,12 @@ public class DaoTelefone {
 		}
 	}
 	
-	public List<Telefone> listarTodosTelefones(Long codigo) {
+	public List<Telefone> listarTodosTelefones(Long codUsuario) {
 		try {
 			List<Telefone> listar = new ArrayList<Telefone>();
 			
 			String sql = "SELECT codigo, tipo, numero, codigo_usuario" + 
-					"  FROM public.telefone WHERE codigo = '" + codigo + "' ORDER BY codigo;";
+					"  FROM public.telefone WHERE codigo_usuario = '" + codUsuario + "' ORDER BY codigo;";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
@@ -70,7 +70,7 @@ public class DaoTelefone {
 	public void delete(Long codigo) {
 		try {
 			
-			String sql = "DELETE FROM public.telefone" + 
+			String sql = "DELETE FROM public.telefone " + 
 					" WHERE codigo = '" + codigo + "';";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.execute();

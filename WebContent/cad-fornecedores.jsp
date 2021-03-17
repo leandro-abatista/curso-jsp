@@ -12,11 +12,9 @@
 
 <title>curso-jsp</title>
 
-<!-- Adicionando JQuery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <link rel="stylesheet" href="resources/css/estilocad.css">
 
+<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
