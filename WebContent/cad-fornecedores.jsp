@@ -73,13 +73,13 @@
 					<div class="campo">
 						<label for="inscricaoestadual">Inscrição Estadual</label>
 						<input id="inscricaoestadual" type="text" name="inscricaoestadual" value="${forn.inscricaoEstadual}" required="required"
-						style="width: 20em;">
+						style="width: 20em;" maxlength="25">
 					</div>
 					
 					<div class="campo">
 						<label for="inscricaomunicipal">Inscrição Municipal</label>
 						<input id="inscricaomunicipal" type="text" name="inscricaomunicipal" value="${forn.inscricaoMunicipal}" required="required"
-						style="width: 20em;">
+						style="width: 20em;" maxlength="25">
 					</div>	
 				
 				</fieldset>
@@ -257,9 +257,7 @@
 						
 					<div class="modal-body">
 							
-						<label id="label-1">Código: <c:out value="${forn.codigo}"/></label>
-						<br>
-						<label id="label-2">Razão Social: <c:out value="${forn.razaoSocial}"/></label>
+						
 							
 					</div>
 						
@@ -274,6 +272,9 @@
 	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
+	
 	<script type="text/javascript">
 	
 		$(document).ready(function() { // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
@@ -288,6 +289,11 @@
 
 			return true;
 		}
+
+		$(document).ready(function(){
+			$("#cnpj").mask("000.000.000/0000-00", {reverse:true});
+			$("#cep").mask("00000-000");			$
+		});
 
 		function consultarCep() {
 			var cep = $('#cep').val();

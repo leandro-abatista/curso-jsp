@@ -29,45 +29,35 @@ public class FornecedorServlet extends HttpServlet {
     public FornecedorServlet() {
         super();
     }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String acao = request.getParameter("acao");
 		String forn = request.getParameter("forn");
 		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-fornecedores.jsp");
+		
 		if (acao != null && acao.equalsIgnoreCase("delete")) {
 			daoFornecedor.delete(Long.parseLong(forn));
 			request.setAttribute("mensagem", "Registro removido com sucesso!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-fornecedores.jsp");
+			
 			request.setAttribute("fornecedores", daoFornecedor.listarTodosFornecedor());
-			dispatcher.forward(request, response);
 			
-		} else
-			
-		if (acao != null && acao.equalsIgnoreCase("update")) {
+		} else if (acao != null && acao.equalsIgnoreCase("update")) {
 			FornecedorBean fornecedorBean = daoFornecedor.consultarCodigo(Long.parseLong(forn));
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-fornecedores.jsp");
 			request.setAttribute("forn", fornecedorBean);
-			dispatcher.forward(request, response);
 			
-		} else
-			
-		if (acao != null && acao.equalsIgnoreCase("visualizar")) {
-				FornecedorBean fornecedorBean = daoFornecedor.consultarCodigo(Long.parseLong(forn));
+		} else if (acao != null && acao.equalsIgnoreCase("visualizar")) {
+			FornecedorBean fornecedorBean = daoFornecedor.consultarCodigo(Long.parseLong(forn));
+			request.setAttribute("forn", fornecedorBean);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-fornecedores.jsp");
-				request.setAttribute("forn", fornecedorBean);
-				dispatcher.forward(request, response);
-				
-		} else
-		
-		if (acao.equalsIgnoreCase("listarTodos")) {
+		} else if (acao.equalsIgnoreCase("listarTodos")) {
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-fornecedores.jsp");
 			request.setAttribute("fornecedores", daoFornecedor.listarTodosFornecedor());
-			dispatcher.forward(request, response);
-			
 		}
+		
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

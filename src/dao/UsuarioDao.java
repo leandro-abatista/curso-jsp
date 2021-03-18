@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connection.SingleConnection;
+import model.classes.beans.UsuarioBean;
 
 /**
  * classe responsável por realizar o CRUD com o banco de dados
@@ -20,16 +21,24 @@ public class UsuarioDao {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public boolean validarUsuario(String login, String senha) throws SQLException {
-		
-		String sql = "select from usuario where login = '" + login + "' and senha = '" + senha + "'";
-		PreparedStatement ps = connection.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		
-		if (rs.next()) {
-			return true;//possui usuário
-		} else {
-			return false;//não possui usuário
+	public UsuarioBean validarUsuario(UsuarioBean usuarioBean) {
+		try {
+			String sql = "select * from usuario where login = ? AND senha = ?;";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, usuarioBean.getLogin());
+			ps.setString(2, usuarioBean.getSenha());
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				UsuarioBean user = new UsuarioBean();
+				user.setLogin(rs.getString("login"));
+				user.setSenha(rs.getString("senha"));
+				
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return null; 
 	}
 }

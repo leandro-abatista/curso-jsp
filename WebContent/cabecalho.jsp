@@ -23,7 +23,13 @@
 
 	<nav class="menulateral">
 	
-		<div class="titulo">Logo<span class="material-icons btnFecha">close</span></div>
+		<div class="titulo">
+			
+			Logo
+		
+			<span class="material-icons btnFecha">close</span>
+		
+		</div>
 		
 		<ul>
 			

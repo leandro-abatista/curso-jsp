@@ -1,3 +1,4 @@
+<%@page import="model.classes.beans.UsuarioBean"%>
 <jsp:useBean id="beanJsp" class="model.classes.beans.UsuarioBean" type="model.classes.beans.UsuarioBean"/>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -31,7 +32,7 @@
   			<h3>${mensagem}</h3>
 		</div>
 		
-		<form class="form" action="usuarioServlet" method="post">
+		<form class="formulario" action="usuarioServlet" method="post">
 		
 			<fieldset>
 			
@@ -71,8 +72,8 @@
 					
 					<div class="campo">
 						<label for="senha">Senha</label>
-						<input id="senha" type="text" id="senha" name="senha" value="${user.senha}" required="required"
-						style="width: 20em;">
+						<input id="senha" type="password" id="senha" name="senha" value="${user.senha}" required="required"
+						style="width: 20em;" >
 					</div>	
 				
 				</fieldset>
@@ -88,9 +89,31 @@
 					<div class="campo">
 						<label for="email">E-mail</label>
 						<input id="email" type="email" name="email" value="${user.email}" required="required"
-						style="width: 30em;">
+						style="width: 30em;" x-moz-errormessage="Informe um endereço de e-mail válido.">
 					</div>	
 				
+				</fieldset>
+				
+				<fieldset class="grupo">
+					
+					<div class="campo">
+						<label for="ativo" >Ativo</label>
+						<input type="checkbox" id="ativo" name="ativo" 
+							
+							<%
+								if(request.getAttribute("user") != null){
+									UsuarioBean user = (UsuarioBean) request.getAttribute("user");
+									if(user.isAtivo()){
+										out.print(" ");
+										out.print("checked=\"checked\"");
+										out.print(" ");
+									}
+								}
+							%>
+						
+						>
+					</div>
+					
 				</fieldset>
 				
 					
@@ -99,8 +122,8 @@
 			
 			<button class="btn submit" type="submit" value="salvar">Salvar</button>
 			
-			<button class="btn submit" type="submit" value="cancelar"
-			onclick="history.go(0)">Cancelar</button>
+			<button type="submit" class="btn submit" value="Cancelar"
+				onclick="document.getElementById('formulario').reset();">Cancelar</button>
 			
 		</form>
 		

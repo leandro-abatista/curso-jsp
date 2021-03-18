@@ -32,31 +32,23 @@ public class ProdutoServlet extends HttpServlet {
 		String acao = request.getParameter("acao");
 		String prod = request.getParameter("prod");
 		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-produtos.jsp");
+		
 		if (acao != null && acao.equalsIgnoreCase("delete")) {
 			daoProduto.delete(Long.parseLong(prod));
 			request.setAttribute("mensagem", "Cadastro efetuado com sucesso!");
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-produtos.jsp");
 			request.setAttribute("produtos", daoProduto.listarTodosProdutos());
-			dispatcher.forward(request, response);
 			
-		} else 
-			
-		if (acao != null && acao.equalsIgnoreCase("update")) {
+		} else if (acao != null && acao.equalsIgnoreCase("update")) {
 			ProdutoBean produtoBean = daoProduto.consultarProduto(Long.parseLong(prod));
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-produtos.jsp");
 			request.setAttribute("prod",produtoBean);
-			dispatcher.forward(request, response);
-		} else
 			
-		if (acao != null && acao.equalsIgnoreCase("listarTodos")) {
+		} else if (acao != null && acao.equalsIgnoreCase("listarTodos")) {
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-produtos.jsp");
 			request.setAttribute("produtos", daoProduto.listarTodosProdutos());
-			dispatcher.forward(request, response);
-			
 		}
+		
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,7 +61,13 @@ public class ProdutoServlet extends HttpServlet {
 		ProdutoBean produtoBean = new ProdutoBean();
 		produtoBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
 		produtoBean.setNome(nome);
-		produtoBean.setValor(Double.parseDouble(valor));
+		
+		if (valor != null && !valor.isEmpty()) {
+			String valorParce = valor.replaceAll("\\.", "").replaceAll("\\,", ".");
+			produtoBean.setValor(Double.parseDouble(valorParce));
+			
+		}
+		
 		produtoBean.setQuantidade(Integer.parseInt(quantidade));
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -103,8 +101,6 @@ public class ProdutoServlet extends HttpServlet {
 			daoProduto.update(produtoBean);
 			request.setAttribute("mensagem", "Registro atualizado com sucesso!");
 		}
-		
-		
 		
 		if (!podeInserir) {
 			request.setAttribute("prod", produtoBean);

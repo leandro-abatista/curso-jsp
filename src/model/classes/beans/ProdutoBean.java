@@ -1,7 +1,9 @@
 package model.classes.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ProdutoBean implements Serializable {
 
@@ -12,6 +14,7 @@ public class ProdutoBean implements Serializable {
 	private Double valor;
 	private Integer quantidade;
 	private Date dataCadastro;
+	
 
 	public Long getCodigo() {
 		return codigo;

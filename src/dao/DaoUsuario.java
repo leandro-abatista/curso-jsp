@@ -20,7 +20,7 @@ public class DaoUsuario {
 	public void salvar(UsuarioBean usuarioBean) {
 		try {
 
-			String sql = "INSERT INTO usuario(login, senha, nome, cpf, telefone, email) VALUES (?,?,?,?,?,?);";
+			String sql = "INSERT INTO usuario(login, senha, nome, cpf, telefone, email, ativo) VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, usuarioBean.getLogin());
 			ps.setString(2, usuarioBean.getSenha());
@@ -28,6 +28,7 @@ public class DaoUsuario {
 			ps.setString(4, usuarioBean.getCpf());
 			ps.setString(5, usuarioBean.getTelefone());
 			ps.setString(6, usuarioBean.getEmail());
+			ps.setBoolean(7, usuarioBean.isAtivo());
 			
 			ps.execute();
 			connection.commit();
@@ -48,19 +49,21 @@ public class DaoUsuario {
 
 			List<UsuarioBean> lista = new ArrayList<UsuarioBean>();
 
-			String sql = "SELECT * FROM usuario ORDER BY codigo";
+			String sql = "SELECT codigo, nome, cpf, login, senha, telefone, email, ativo "
+					+ " FROM usuario ORDER BY codigo";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				UsuarioBean usuarioBean = new UsuarioBean();
 				usuarioBean.setCodigo(rs.getLong("codigo"));
-				usuarioBean.setLogin(rs.getString("login"));
-				usuarioBean.setSenha(rs.getString("senha"));
 				usuarioBean.setNome(rs.getString("nome"));
 				usuarioBean.setCpf(rs.getString("cpf"));
+				usuarioBean.setLogin(rs.getString("login"));
+				usuarioBean.setSenha(rs.getString("senha"));
 				usuarioBean.setTelefone(rs.getString("telefone"));
 				usuarioBean.setEmail(rs.getString("email"));
+				usuarioBean.setAtivo(rs.getBoolean("ativo"));
 
 				lista.add(usuarioBean);
 			}
@@ -76,19 +79,21 @@ public class DaoUsuario {
 	public UsuarioBean consultarCodigo(Long codigo) {
 		try {
 			
-			String sql = "SELECT * FROM usuario WHERE codigo = '" + codigo + "'";
+			String sql = "SELECT codigo, nome, cpf, login, senha, telefone, email, ativo "
+					+ " FROM usuario WHERE codigo = '" + codigo + "'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
 				UsuarioBean usuarioBean = new UsuarioBean();
 				usuarioBean.setCodigo(rs.getLong("codigo"));
-				usuarioBean.setLogin(rs.getString("login"));
-				usuarioBean.setSenha(rs.getString("senha"));
 				usuarioBean.setNome(rs.getString("nome"));
 				usuarioBean.setCpf(rs.getString("cpf"));
+				usuarioBean.setLogin(rs.getString("login"));
+				usuarioBean.setSenha(rs.getString("senha"));
 				usuarioBean.setTelefone(rs.getString("telefone"));
 				usuarioBean.setEmail(rs.getString("email"));
+				usuarioBean.setAtivo(rs.getBoolean("ativo"));
 				
 				return usuarioBean;
 			}
@@ -101,7 +106,7 @@ public class DaoUsuario {
 	public void atualizar(UsuarioBean usuarioBean) {
 		try {
 			
-			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, cpf = ?, telefone = ?, email = ?"
+			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, cpf = ?, telefone = ?, email = ?, ativo = ?"
 					+ " WHERE codigo = " + usuarioBean.getCodigo();
 			PreparedStatement ps= connection.prepareStatement(sql);
 			ps.setString(1, usuarioBean.getLogin());
@@ -110,6 +115,8 @@ public class DaoUsuario {
 			ps.setString(4, usuarioBean.getCpf());
 			ps.setString(5, usuarioBean.getTelefone());
 			ps.setString(6, usuarioBean.getEmail());
+			ps.setBoolean(7, usuarioBean.isAtivo());
+			
 			ps.executeUpdate();
 			connection.commit();
 			

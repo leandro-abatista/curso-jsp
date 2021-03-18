@@ -13,6 +13,7 @@ public class UsuarioBean implements Serializable {
 	private String cpf;
 	private String telefone;
 	private String email;
+	private boolean ativo;
 	
 
 	public Long getCodigo() {
@@ -71,12 +72,12 @@ public class UsuarioBean implements Serializable {
 		this.email = email;
 	}
 
-	public boolean validarLoginSenha(String login, String senha) {
-		if (login.equalsIgnoreCase("admin") && senha.equalsIgnoreCase("admin")) {
-			return true;
-		} else {
-			return false;
-		}
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

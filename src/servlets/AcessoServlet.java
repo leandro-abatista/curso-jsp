@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UsuarioDao;
 import model.classes.beans.UsuarioBean;
@@ -29,27 +30,32 @@ public class AcessoServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//iniciando um objeto usuario
-		UsuarioBean usuarioBean = new UsuarioBean();
 		
+		//parâmetros da página jsp
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
-		try {
-			if (usuarioDao.validarUsuario(login, senha)) {//se o acesso for ok
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
-				dispatcher.forward(request, response);
-			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessonegado.jsp");
-				dispatcher.forward(request, response);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		//iniciando um objeto usuario
+		UsuarioBean usuarioBean = new UsuarioBean();
+		usuarioBean.setLogin(login);
+		usuarioBean.setSenha(senha);
+		
+		UsuarioBean usuarioAutenticado = usuarioDao.validarUsuario(usuarioBean);
+		
+		if (usuarioAutenticado != null) {
+			HttpSession sessao = request.getSession();
+			sessao.setAttribute("usuario", usuarioAutenticado);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
+			dispatcher.forward(request, response);
+			
+		} else {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("acessonegado.jsp");
+			dispatcher.forward(request, response);
 		}
+		
+		
+		
 	}
 
 }

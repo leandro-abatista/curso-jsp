@@ -28,14 +28,14 @@
 			
 			<div class="card-group">
 			
-				<label id="label-1">Login: </label>
+				<label id="login">Login: </label>
 				<input type="text" id="login" name="login" placeholder="Digite seu login" required="required">
 				
 			</div>
 			
 			<div class="card-group">
 			
-				<label id="label-2">Senha: </label>
+				<label id="senha">Senha: </label>
 				<input type="password" id="senha" name="senha" placeholder="Digite sua senha" required="required">
 			
 			</div>

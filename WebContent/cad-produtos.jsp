@@ -56,7 +56,7 @@
 					<div class="campo">
 						<label for="valor">Valor</label>
 						<input id="valor" type="text" name="valor" value="${prod.valor}" required="required"
-						style="width: 10em;" onkeypress="$(this).mask('###.###.##0,00', {reverse: true});">
+						style="width: 10em;">
 					</div>	
 					
 					<div class="campo">
@@ -132,11 +132,17 @@
 	</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
+	
 	<script type="text/javascript">
 	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
-		  $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
-		});
+		 $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
+	});
 
+	$(document).ready(function() {
+    	$("#valor").mask('###.###.##0,00', {reverse: true});	
+	});
 	
 	</script>
 	
