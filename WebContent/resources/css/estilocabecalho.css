@@ -67,6 +67,10 @@
 	display: block;
 }
 
+.menulateral ul .itensConsulta.mostra{
+	display: block;
+}
+
 .menulateral ul .itenSair.mostra{
 	display: block;
 }

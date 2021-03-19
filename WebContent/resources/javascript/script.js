@@ -10,6 +10,10 @@ $('.sair').click(function(){
 	$('.menulateral ul .itenSair').toggleClass('mostra');
 });
 
+$('.consultas').click(function(){
+	$('.menulateral ul .itensConsulta').toggleClass('mostra');
+});
+
 
 /*
  * 
@@ -34,6 +38,10 @@ $('.btnFecha').click(function(){
  */
 $('.cadastros').click(function(){
 	$('.menulateral ul .seta1').toggleClass('gira');
+});
+
+$('.consultas').click(function(){
+	$('.menulateral ul .seta2').toggleClass('gira');
 });
 
 $('.sair').click(function(){

@@ -51,13 +51,13 @@
 					<div class="campo">
 						<label for="nome">Nome</label>
 						<input id="nome" type="text" name="nome" value="${user.nome}" required="required"
-						style="width: 20em;">
+						style="width: 30em;">
 					</div>	
 					
 					<div class="campo">
 						<label for="cpf">CPF</label>
 						<input id="cpf" type="text" name="cpf" value="${user.cpf}" required="required"
-						style="width: 20em;"  maxlength="14">
+						style="width: 12em;"  maxlength="14">
 					</div>	
 				
 				</fieldset>
@@ -67,13 +67,13 @@
 					<div class="campo">
 						<label for="login">Login</label>
 						<input id="login" type="text" id="login" name="login" value="${user.login}" required="required"
-						style="width: 20em;">
+						style="width: 21em;">
 					</div>	
 					
 					<div class="campo">
 						<label for="senha">Senha</label>
-						<input id="senha" type="password" id="senha" name="senha" value="${user.senha}" required="required"
-						style="width: 20em;" >
+						<input id="senha" type="text" id="senha" name="senha" value="${user.senha}" required="required"
+						style="width: 21em;" >
 					</div>	
 				
 				</fieldset>
@@ -83,7 +83,7 @@
 					<div class="campo">
 						<label for="telefone">Telefone</label>
 						<input id="telefone" type="text" name="telefone" value="${user.telefone}" required="required"
-						style="width: 20em;" maxlength="17">
+						style="width: 12em;" maxlength="17">
 					</div>	
 					
 					<div class="campo">

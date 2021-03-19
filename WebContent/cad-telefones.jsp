@@ -69,7 +69,7 @@
 					
 					<div class="campo">
 						<label for="numero">Número</label>
-						<input id="numero" type="text" name="numero"  required="required" style="width: 20em;">
+						<input id="numero" type="text" name="numero"  required="required" style="width: 19em;">
 					</div>
 					
 				</fieldset>

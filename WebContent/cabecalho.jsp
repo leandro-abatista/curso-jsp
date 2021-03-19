@@ -43,15 +43,21 @@
 				</ul>
 			</li>
 			
-			<li><a href="#">Relatório<span class="material-icons seta2">arrow_right</span></a></li>
+			<li><a href="#" class="consultas">Consulta<span class="material-icons seta2">arrow_right</span></a>
+				<ul class="itensConsulta">
+					<li><a href="servletConsultaUser?acao=listarTodos">Usuários</</a></li>
+				</ul>
+			</li>
 			
-			<li><a href="#">Agenda<span class="material-icons seta3">arrow_right</span></a></li>
+			<li><a href="#">Relatório<span class="material-icons seta3">arrow_right</span></a></li>
 			
-			<li><a href="#">Serviços<span class="material-icons seta4">arrow_right</span></a></li>
+			<li><a href="#">Agenda<span class="material-icons seta4">arrow_right</span></a></li>
 			
-			<li><a href="#">Sobre<span class="material-icons seta5">arrow_right</span></a></li>
+			<li><a href="#">Serviços<span class="material-icons seta5">arrow_right</span></a></li>
 			
-			<li><a href="#">Ajuda<span class="material-icons seta6">arrow_right</span></a></li>
+			<li><a href="#">Sobre<span class="material-icons seta6">arrow_right</span></a></li>
+			
+			<li><a href="#">Ajuda<span class="material-icons seta8">arrow_right</span></a></li>
 			
 			<li><a href="#" class="sair">Sair<span class="material-icons seta7">arrow_right</span></a>
 				<ul class="itenSair">
