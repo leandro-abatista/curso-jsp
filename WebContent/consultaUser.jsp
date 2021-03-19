@@ -29,8 +29,9 @@
 	
 		<p>Consulta de Usuários</p>
 		
-		<form id="formulario" action="servletConsultaUser" method="post">
-
+		
+		
+		<form id="formulario" action="consultaUserServlet" method="post">
 
 			<div class="caption">Usuários Cadastrados</div>
 
@@ -81,6 +82,17 @@
 
 			</div>
 
+		</form>
+		
+		<form id="formPesquisa" action="servletPesquisa" method="post">
+			
+			<div class="div-pesquisa">
+			
+				<input class="textobusca" type="text" id="descricao" name="descricao" placeholder="Buscar...">
+				<button class="btnPesquisar" type="submit" value="Pesquisar">Pesquisar</button>
+			
+			</div>
+			
 		</form>
 		
 	</div>

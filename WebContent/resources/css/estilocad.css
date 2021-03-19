@@ -184,13 +184,16 @@ td:last-child {
 	margin-right: 5px;
 	text-decoration: none;
 	padding: 5px;
-}
-
-.botao a span{
-	font-size: 28px;
 	text-align: center;
 }
 
+.botao .add{
+	padding: 20px;
+}
+
+.botao span{
+	font-size: 32px;
+}
 
 .edit:hover {
 	color: #0a79df;

@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoUsuario;
 
-@WebServlet(name = "servletConsultaUser", urlPatterns = { "/servletConsultaUser" })
-public class servletConsultaUser extends HttpServlet {
+
+@WebServlet("/consultaUserServlet")
+public class ConsultaUserServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private DaoUsuario dao = new DaoUsuario();
-	
-    public servletConsultaUser() {
+	private DaoUsuario daoUsuario = new DaoUsuario();
+       
+    public ConsultaUserServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class servletConsultaUser extends HttpServlet {
 		
 		if (acao != null && acao.equalsIgnoreCase("listarTodos")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaUser.jsp");
-			request.setAttribute("usuarios", dao.listarTodosUsuarios());
+			request.setAttribute("usuarios", daoUsuario.listarTodosUsuarios());
 			dispatcher.forward(request, response);
 		}
 	}

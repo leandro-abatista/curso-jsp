@@ -160,7 +160,7 @@
 						
 						<a id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${usuario.codigo}">
 							<span class="material-icons">
-								delete_forever
+								delete
 							</span>
 						</a>
 						

@@ -28,6 +28,7 @@ p{
 	text-transform: uppercase;
 	font-weight: 600;
 	text-align: center;
+	margin-top: 20px;
 	margin-bottom: 0;
 	background: #4682B4;
 	padding: 10px 10px;
@@ -81,7 +82,7 @@ tbody tr {
 	transition: background 0.25s ease;
 }
 
-/* demo styles */
+/* demo styles 
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 
@@ -89,6 +90,8 @@ body{
   background: -webkit-linear-gradient(left, #25c481, #A9A9A9);
   background: linear-gradient(to right, #A9A9A9, #A9A9A9);
 }
+
+*/
 section{
   margin: 1em;
 }
@@ -110,38 +113,36 @@ section{
 
 
 .div-pesquisa{
-	background-color: #2F4F4F;
-	border: solid 1px #4682B4;
-	border-radius: 5px;
-	width: 50%;
-	margin-bottom: 40px;
-	position: relative;
-	height: 50px;
+	width: 50%; /* define a largura do campo */
 }
 
-.textobusca{
-	float: left;
-	padding-left: 5px;
-	font-size: 18px;
-	height: 45px;
-	width: 100%;
+input {
+	width: 100%; /* define a largura do campo input, igual a largura do div-pesquisar*/
+	border-radius: 5px;
+}
+
+input, button {
+	padding: 10px;
+}
+
+button {
+	top: 0;
+	right: 0;
+	/* posiciona o botão em relação ao container, mas
+  como o campo está exatamente contido no container
+  o posicionamento se dá também em relação ao campo */
 }
 
 .btnPesquisar{
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-
-.div-pesquisa span{
-	font-size: 35px;
-}
-.btnP{
-	width: 100px;
-	height: 40px;
 	border-radius: 5px;
 	background: #4682B4;
+	color: #fff;
 }
+
+
+
+
+
 
 
 

@@ -14,6 +14,12 @@
 
 
 <link rel="stylesheet" href="resources/css/estilocad.css">
+
+<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+
 </head>
 
 <body>
@@ -48,6 +54,19 @@
 						<input id="nome" type="text" name="nome" value="${prod.nome}" 
 						style="width: 30em;">
 					</div>	
+					
+					<div class="campo">
+						<label for="categoria">Categoria</label>
+						<select id="categoria" name="categoria" style="width: 15em;">
+							
+							<option selected="selected" disabled="disabled">Selecione</option>
+						
+						</select>
+						<a class="botao add" type="button" href="categoriaServlet?acao=listarTodos">
+							<span class="material-icons">add_box</span>
+						</a>
+						
+					</div>
 					
 				</fieldset>
 				
@@ -84,7 +103,7 @@
 			<button class="btn submit" type="submit" value="salvar">Salvar</button>
 			
 			<button class="btn submit" type="submit" value="cancelar"
-			onclick="history.go(0)">Cancelar</button>
+			onclick="document.getElementById('formulario').reset();">Cancelar</button>
 			
 		</form>
 		
@@ -97,7 +116,7 @@
 				<th width="15%">VALOR</th>
 				<th width="15%">ESTOQUE</th>
 				<th width="15%">DATA DE CADASTRO</th>
-				<th align="center" width="8%">AÇÃO</th>
+				<th align="center" width="12%">AÇÃO</th>
 			</tr>
 		</thead>
 			
@@ -110,14 +129,14 @@
 					<td width="15%"><c:out value="${prod.quantidade}"/></td>
 					<td width="15%"><fmt:formatDate value="${prod.dataCadastro}" pattern="dd-MM-yyyy" /></td>
 					
-					<td align="center" width="8%">
-						<a id="edit" class="botao edit" href="produtoServlet?acao=update&prod=${prod.codigo}">
+					<td align="center" width="12%">
+						<a id="edit" type="button" class="botao edit" href="produtoServlet?acao=update&prod=${prod.codigo}">
 							<span class="material-icons">
 								edit
 							</span>
 						</a>
 						
-						<a id="delete" class="botao delete" href="produtoServlet?acao=delete&prod=${prod.codigo}">
+						<a id="delete" type="button" class="botao delete" href="produtoServlet?acao=delete&prod=${prod.codigo}">
 							<span class="material-icons">
 								delete
 							</span>
