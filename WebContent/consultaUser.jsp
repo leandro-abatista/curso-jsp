@@ -29,6 +29,19 @@
 	
 		<p>Consulta de Usuários</p>
 		
+		<form id="formPesquisa" action="servletPesquisa" method="post">
+
+			<div id="divBusca">
+				<input type="text" id="txtBusca" name="descricao" placeholder="Buscar..." />
+				<button id="btnBusca" type="submit" value="Pesquisar">Pesquisar
+					<span class="material-icons">
+						search
+					</span>
+				</button>
+			</div>
+
+		</form>
+		
 		
 		
 		<form id="formulario" action="consultaUserServlet" method="post">

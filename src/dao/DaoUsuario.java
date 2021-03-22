@@ -92,7 +92,8 @@ public class DaoUsuario {
 			usuarioBean.setTelefone(rs.getString("telefone"));
 			usuarioBean.setEmail(rs.getString("email"));
 			usuarioBean.setAtivo(rs.getBoolean("ativo"));
-
+			
+			lista.add(usuarioBean);
 		}
 		return lista;
 	}
