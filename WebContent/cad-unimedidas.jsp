@@ -31,7 +31,7 @@
   			<h3>${mensagem}</h3>
 		</div>
 		
-		<form class="formulario" action="categoriaServlet" method="post">
+		<form class="formulario" action="unidadeMedidaServlet" method="post">
 		
 			<fieldset>
 				
@@ -39,12 +39,17 @@
 				
 					<div class="campo">
 						<label for="codigo">Código</label>
-						<input id="codigo" type="text"  name="codigo" value="${cat.codigo}" readonly="readonly" style="width: 10em;">
+						<input id="codigo" type="text"  name="codigo" value="${um.codigo}" readonly="readonly" style="width: 10em;">
+					</div>
+					
+					<div class="campo">
+						<label for="sigla">Sigla</label>
+						<input id="sigla" type="text" name="sigla" value="${um.sigla}" required="required" style="width: 10em;">
 					</div>
 				
 					<div class="campo">
-						<label for="descricao">Descricao</label>
-						<input id="descricao" type="text" name="descricao" value="${cat.descricao}"  required="required" style="width: 20em;">
+						<label for="descricao">Descrição</label>
+						<input id="descricao" type="text" name="descricao" value="${um.descricao}"  required="required" style="width: 30em;">
 					</div>	
 					
 				</fieldset>
@@ -61,29 +66,31 @@
 		<thead>
 			<tr>
 				<th width="8%">CÓDIGO</th>
+				<th width="8%">SIGLA</th>
 				<th width="20%">DESCRIÇÃO</th>
 				<th align="center" width="15%">AÇÃO</th>
 			</tr>
 		</thead>
 			
-		<c:forEach items="${categorias}" var="cat">
+		<c:forEach items="${unimedidas}" var="um">
 		
 			<tbody>
 			
 				<tr>
 				
-					<td width="8%"><c:out value="${cat.codigo}"/></td>
-					<td width="20%"><c:out value="${cat.descricao}"/></td>
+					<td width="8%"><c:out value="${um.codigo}"/></td>
+					<td width="8%"><c:out value="${um.sigla}"/></td>
+					<td width="20%"><c:out value="${um.descricao}"/></td>
 					
 					<td align="center" width="15%">
 					
-						<a id="edit" type="button" class="botao edit" href="categoriaServlet?acao=update&cat=${cat.codigo}">
+						<a id="edit" type="button" class="botao edit" href="unidadeMedidaServlet?acao=update&um=${um.codigo}">
 							<span class="material-icons">
 								edit
 							</span>
 						</a>
 						
-						<a id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${cat.codigo}">
+						<a id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${um.codigo}">
 							<span class="material-icons">
 								delete
 							</span>
@@ -96,7 +103,7 @@
 			</tbody>
 			
 			<!-- Início Modal de confirmação de exclusão de registro -->
-			<div class="modal modal-danger fade" id="${cat.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal modal-danger fade" id="${um.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog  modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -110,12 +117,12 @@
 						</div>
 		
 						<div class="modal-body">
-							<h6>Deseja excluir a categoria <c:out value="${cat.descricao}"/> ?</h6>
+							<h6>Deseja excluir a categoria <c:out value="${um.descricao}"/> ?</h6>
 						</div>
 		
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-							<a type="submit" class="btn btn-warning" href="categoriaServlet?acao=delete&cat=${cat.codigo}">Excluir</a>
+							<a type="submit" class="btn btn-warning" href="unidadeMedidaServlet?acao=delete&um=${um.codigo}">Excluir</a>
 						</div>
 								
 					</div>

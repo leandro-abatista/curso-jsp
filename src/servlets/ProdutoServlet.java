@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoCategoria;
+import dao.DaoFornecedor;
 import dao.DaoProduto;
+import dao.DaoUnidadeMedida;
+import model.classes.beans.CategoriaBean;
 import model.classes.beans.ProdutoBean;
 
 @WebServlet("/produtoServlet")
@@ -36,7 +40,7 @@ public class ProdutoServlet extends HttpServlet {
 		
 		if (acao != null && acao.equalsIgnoreCase("delete")) {
 			daoProduto.delete(Long.parseLong(prod));
-			request.setAttribute("mensagem", "Cadastro efetuado com sucesso!");
+			request.setAttribute("mensagem", "Registro excluído com sucesso!");
 			request.setAttribute("produtos", daoProduto.listarTodosProdutos());
 			
 		} else if (acao != null && acao.equalsIgnoreCase("update")) {
@@ -48,6 +52,10 @@ public class ProdutoServlet extends HttpServlet {
 			request.setAttribute("produtos", daoProduto.listarTodosProdutos());
 		}
 		
+		request.setAttribute("fornecedores", daoProduto.listarTodosFornecedor());
+		request.setAttribute("categorias", daoProduto.listarTodasCategorias());
+		request.setAttribute("unimedidas", daoProduto.listarTodasUnMedidas());
+		
 		dispatcher.forward(request, response);
 	}
 
@@ -57,11 +65,15 @@ public class ProdutoServlet extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String valor = request.getParameter("valor");
 		String quantidade = request.getParameter("quantidade");
+		String fornecedor = request.getParameter("fornecedor");
+		String categoria = request.getParameter("categoria");
+		String unimedida = request.getParameter("unimedida");
 		
 		ProdutoBean produtoBean = new ProdutoBean();
 		produtoBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
 		produtoBean.setNome(nome);
 		
+		/* conversão de ponto por vírgula*/
 		if (valor != null && !valor.isEmpty()) {
 			String valorParce = valor.replaceAll("\\.", "").replaceAll("\\,", ".");
 			produtoBean.setValor(Double.parseDouble(valorParce));
@@ -69,14 +81,17 @@ public class ProdutoServlet extends HttpServlet {
 		}
 		
 		produtoBean.setQuantidade(Integer.parseInt(quantidade));
-		
+		/*conversão de data*/
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			
 			produtoBean.setDataCadastro(df.parse(request.getParameter("datacadastro")));
 		} catch (ParseException e) {
 			produtoBean.setDataCadastro(new Date());
 		}
+		
+		produtoBean.setCodigo_forn(Long.parseLong(fornecedor));
+		produtoBean.setCodigo_cat(Long.parseLong(categoria));
+		produtoBean.setCodigo_unidmedida(Long.parseLong(unimedida));
 		
 		String mensagem = null;
 		boolean podeInserir = true;
@@ -108,6 +123,9 @@ public class ProdutoServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/cad-produtos.jsp");
 		request.setAttribute("produtos", daoProduto.listarTodosProdutos());
+		request.setAttribute("fornecedores", daoProduto.listarTodosFornecedor());
+		request.setAttribute("categorias", daoProduto.listarTodasCategorias());
+		request.setAttribute("unimedidas", daoProduto.listarTodasUnMedidas());
 		dispatcher.forward(request, response);
 		
 	}

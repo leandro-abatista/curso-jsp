@@ -128,7 +128,8 @@ public class DaoUsuario {
 	public void atualizar(UsuarioBean usuarioBean) {
 		try {
 			
-			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, cpf = ?, telefone = ?, email = ?, ativo = ?"
+			String sql = "UPDATE usuario "
+					+ " SET login = ?, senha = ?, nome = ?, cpf = ?, telefone = ?, email = ?, ativo = ?"
 					+ " WHERE codigo = " + usuarioBean.getCodigo();
 			PreparedStatement ps= connection.prepareStatement(sql);
 			ps.setString(1, usuarioBean.getLogin());

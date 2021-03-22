@@ -1,4 +1,3 @@
-<jsp:useBean id="beanJsp" class="model.classes.beans.FornecedorBean" type="model.classes.beans.FornecedorBean"/>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -50,6 +49,33 @@
 				<fieldset class="grupo">
 				
 					<div class="campo">
+						<label for="fornecedor">Fornecedor</label>
+						<select id="fornecedor" name="fornecedor" style="width: 20em;">
+							
+							<option selected="selected" disabled="disabled">Selecione</option>
+							
+							<!-- usando jstl -->
+							<c:forEach items="${fornecedores}" var="forn">
+								<option value="${forn.codigo}" id="${forn.codigo}"
+									
+									<c:if test="${forn.codigo == prod.codigo_forn}">
+										<c:out value="selected=selected"/>
+									</c:if>
+								
+								>
+									${forn.razaoSocial}
+								</option>
+							</c:forEach>
+						
+						</select>
+						
+					</div>
+				
+				</fieldset>
+				
+				<fieldset class="grupo">
+				
+					<div class="campo">
 						<label for="nome">Item</label>
 						<input id="nome" type="text" name="nome" value="${prod.nome}" 
 						style="width: 30em;">
@@ -60,9 +86,46 @@
 						<select id="categoria" name="categoria" style="width: 15em;">
 							
 							<option selected="selected" disabled="disabled">Selecione</option>
+							
+							<!-- usando jstl -->
+							<c:forEach items="${categorias}" var="cat">
+								<option value="${cat.codigo}" id="${cat.codigo}"
+									<c:if test="${cat.codigo == prod.codigo_cat}">
+										<c:out value="selected=selected"/>
+									</c:if>
+								>
+									${cat.descricao}
+								</option>
+							</c:forEach>
 						
 						</select>
 						<a class="botao add" type="button" href="categoriaServlet?acao=listarTodos">
+							<span class="material-icons">add_box</span>
+						</a>
+						
+					</div>
+					
+					<div class="campo">
+						<label for="unimedida">Unid. Medida</label>
+						<select id="unimedida" name="unimedida" style="width: 15em;">
+							
+							<option selected="selected" disabled="disabled">Selecione</option>
+							
+							<!-- usando jstl -->
+							<c:forEach items="${unimedidas}" var="um">
+								<option value="${um.codigo}" id="${um.codigo}"
+								
+									<c:if test="${um.codigo == prod.codigo_unidmedida}">
+										<c:out value="selected=selected"/>
+									</c:if>
+								
+								>
+									${um.descricao}
+								</option>
+							</c:forEach>
+							
+						</select>
+						<a class="botao add" type="button" href="unidadeMedidaServlet?acao=listarTodos">
 							<span class="material-icons">add_box</span>
 						</a>
 						
@@ -73,7 +136,7 @@
 				<fieldset class="grupo">
 				
 					<div class="campo">
-						<label for="valor">Valor</label>
+						<label for="valor">Valor de Venda</label>
 						<input id="valor" type="text" name="valor" value="${prod.valor}" required="required"
 						style="width: 10em;">
 					</div>	
@@ -136,7 +199,7 @@
 							</span>
 						</a>
 						
-						<a id="delete" type="button" class="botao delete" href="produtoServlet?acao=delete&prod=${prod.codigo}">
+						<a id="delete" type="button" class="botao delete" href="#" data-toggle="modal" data-target="#${prod.codigo}">
 							<span class="material-icons">
 								delete
 							</span>
@@ -144,6 +207,35 @@
 					</td>
 				</tr>
 			</tbody>
+			
+			<!-- Início Modal de confirmação de exclusão de registro -->
+			<div class="modal modal-danger fade" id="${prod.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog  modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+		
+							<h5 class="modal-title" id="TituloModalCentralizado">Confirmar exclusão</h5>
+		
+							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+								<span aria-hidden="true">&times;</span>
+							</button>
+		
+						</div>
+		
+						<div class="modal-body">
+							<h6>Deseja excluir o produto <c:out value="${prod.nome}"/> ?</h6>
+						</div>
+		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<a type="submit" class="btn btn-warning" href="produtoServlet?acao=delete&prod=${prod.codigo}">Excluir</a>
+						</div>
+								
+					</div>
+				</div>
+			</div>
+			<!-- Fim do Modal de confirmação de exclusão de registro -->
+			
 		</c:forEach>
 	
 	</table>

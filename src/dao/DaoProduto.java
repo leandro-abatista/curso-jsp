@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.SingleConnection;
+import model.classes.beans.CategoriaBean;
+import model.classes.beans.FornecedorBean;
 import model.classes.beans.ProdutoBean;
+import model.classes.beans.UnidadeMedidaBean;
 
 public class DaoProduto {
 	
@@ -21,14 +24,17 @@ public class DaoProduto {
 	public void salvar(ProdutoBean produtoBean) {
 		try {
 			
-			String sql = "INSERT INTO public.produto(" + 
-					"            nome, valor, quantidade, datacadastro)" + 
-					"    VALUES (?, ?, ?, ?);";
+			String sql = "INSERT INTO public.produto( " 
+					+ "    nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn) " 
+					+ "    VALUES (?, ?, ?, ?, ?, ?, ?);";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, produtoBean.getNome());
 			ps.setDouble(2, produtoBean.getValor());
 			ps.setInt(3, produtoBean.getQuantidade());
 			ps.setDate(4, new Date(produtoBean.getDataCadastro().getTime()));
+			ps.setLong(5, produtoBean.getCodigo_cat());
+			ps.setLong(6, produtoBean.getCodigo_unidmedida());
+			ps.setLong(7, produtoBean.getCodigo_forn());
 			
 			ps.execute();
 			connection.commit();
@@ -48,7 +54,7 @@ public class DaoProduto {
 		try {
 			List<ProdutoBean> listar = new ArrayList<ProdutoBean>();
 			
-			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro" + 
+			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn " + 
 					"  FROM public.produto ORDER BY codigo;";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -60,6 +66,9 @@ public class DaoProduto {
 				produtoBean.setValor(rs.getDouble("valor"));
 				produtoBean.setQuantidade(rs.getInt("quantidade"));
 				produtoBean.setDataCadastro(rs.getDate("datacadastro"));
+				produtoBean.setCodigo_cat(rs.getLong("codigo_cat"));
+				produtoBean.setCodigo_unidmedida(rs.getLong("codigo_unidmedida"));
+				produtoBean.setCodigo_forn(rs.getLong("codigo_forn"));
 				
 				listar.add(produtoBean);
 			}
@@ -75,7 +84,7 @@ public class DaoProduto {
 	public ProdutoBean consultarProduto(Long codigo) {
 		try {
 			
-			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro" + 
+			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn " + 
 					"   FROM public.produto WHERE codigo = '" + codigo + "';";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -87,9 +96,111 @@ public class DaoProduto {
 				produtoBean.setValor(rs.getDouble("valor"));
 				produtoBean.setQuantidade(rs.getInt("quantidade"));
 				produtoBean.setDataCadastro(rs.getDate("datacadastro"));
+				produtoBean.setCodigo_cat(rs.getLong("codigo_cat"));
+				produtoBean.setCodigo_unidmedida(rs.getLong("codigo_unidmedida"));
+				produtoBean.setCodigo_forn(rs.getLong("codigo_forn"));
 				
 				return produtoBean;
 			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Lista de categorias cadastradas no bd
+	 * @return
+	 */
+	public List<CategoriaBean> listarTodasCategorias() {
+		try {
+			List<CategoriaBean> listar = new ArrayList<CategoriaBean>();
+			String sql = "SELECT codigo, descricao FROM public.categoria ORDER BY codigo;";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			/*para cada linha, vai iniciar um novo objeto e adicionar na lista*/
+			while (rs.next()) {
+				CategoriaBean cat = new CategoriaBean();
+				cat.setCodigo(rs.getLong("codigo"));
+				cat.setDescricao(rs.getString("descricao"));
+				
+				listar.add(cat);
+			}
+			
+			return listar;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Lista de fornecedores cadastradas no bd
+	 * @return
+	 */
+	public List<FornecedorBean> listarTodosFornecedor(){
+		try {
+			
+			List<FornecedorBean> listar = new ArrayList<FornecedorBean>();
+			
+			String sql = "SELECT codigo, razaosocial, nomefantasia, cnpj, inscricaoestadual, inscricaomunicipal, datacadastro, "
+					+ "  cep, logradouro, numero, bairro, cidade, estado, ibge" 
+					+ "  FROM public.fornecedor ORDER BY codigo;";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				FornecedorBean fornecedorBean = new FornecedorBean();
+				fornecedorBean.setCodigo(rs.getLong("codigo"));
+				fornecedorBean.setRazaoSocial(rs.getString("razaosocial"));
+				fornecedorBean.setNomeFantasia(rs.getString("nomefantasia"));
+				fornecedorBean.setCnpj(rs.getString("cnpj"));
+				fornecedorBean.setInscricaoEstadual(rs.getString("inscricaoestadual"));
+				fornecedorBean.setInscricaoMunicipal(rs.getString("inscricaomunicipal"));
+				fornecedorBean.setDataCadastro(rs.getDate("datacadastro"));
+				fornecedorBean.setCep(rs.getString("cep"));
+				fornecedorBean.setLogradouro(rs.getString("logradouro"));
+				fornecedorBean.setNumero(rs.getString("numero"));
+				fornecedorBean.setBairro(rs.getString("bairro"));
+				fornecedorBean.setCidade(rs.getString("cidade"));
+				fornecedorBean.setEstado(rs.getString("estado"));
+				fornecedorBean.setIbge(rs.getInt("ibge"));
+				
+				listar.add(fornecedorBean);
+			}
+			
+			return listar;
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Lista de unidade de medidas cadastradas no bd
+	 */
+	public List<UnidadeMedidaBean> listarTodasUnMedidas() {
+		try {
+			List<UnidadeMedidaBean> lista = new ArrayList<UnidadeMedidaBean>();
+			String sql = "SELECT codigo, sigla, descricao " + 
+					"  FROM public.unimedida ORDER BY codigo;";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				UnidadeMedidaBean umb = new UnidadeMedidaBean();
+				umb.setCodigo(rs.getLong("codigo"));
+				umb.setSigla(rs.getString("sigla"));
+				umb.setDescricao(rs.getString("descricao"));
+				
+				lista.add(umb);
+			}
+			
+			return lista;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,13 +212,17 @@ public class DaoProduto {
 		try {
 			
 			String sql = "UPDATE public.produto" + 
-					"   SET nome=?, valor=?, quantidade=?, datacadastro=?" + 
+					"   SET codigo=?, nome=?, valor=?, quantidade=?, datacadastro=?, codigo_cat=?, codigo_unidmedida=?, codigo_forn=? " + 
 					" 	WHERE codigo = '" + produtoBean.getCodigo() + "'";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, produtoBean.getNome());
-			ps.setDouble(2, produtoBean.getValor());
-			ps.setInt(3, produtoBean.getQuantidade());
-			ps.setDate(4, new Date(produtoBean.getDataCadastro().getTime()));
+			ps.setLong(1, produtoBean.getCodigo());
+			ps.setString(2, produtoBean.getNome());
+			ps.setDouble(3, produtoBean.getValor());
+			ps.setInt(4, produtoBean.getQuantidade());
+			ps.setDate(5, new Date(produtoBean.getDataCadastro().getTime()));
+			ps.setLong(6, produtoBean.getCodigo_cat());
+			ps.setLong(7, produtoBean.getCodigo_unidmedida());
+			ps.setLong(8, produtoBean.getCodigo_forn());
 			
 			ps.executeUpdate();
 			connection.commit();
