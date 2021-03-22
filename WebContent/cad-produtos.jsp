@@ -26,7 +26,7 @@
 	<jsp:include page="cabecalho.jsp"/>
 	
 	<div class="div-pai">
-		<p>Cadastro de Produto</p>
+		<p>Cadastro de Entrada de Produto</p>
 		
 		<div id="msg" class="msg">
   			<h3>${mensagem}</h3>
@@ -136,15 +136,39 @@
 				<fieldset class="grupo">
 				
 					<div class="campo">
-						<label for="valor">Valor de Venda</label>
-						<input id="valor" type="text" name="valor" value="${prod.valor}" required="required"
+						<label for="valor">Valor de Custo</label>
+						<input class="valor" id="valor" type="text" name="valor" value="${prod.valor}" required="required"
 						style="width: 10em;">
 					</div>	
+					
+					<div class="campo">
+						<label for="valorVenda">Valor de Venda</label>
+						<input class="valorVenda" id="valorVenda" type="text" name="valorVenda" value="${prod.valorVenda}" required="required"
+						style="width: 10em;">
+					</div>
 					
 					<div class="campo">
 						<label for="quantidade">Quantidade</label>
 						<input id="quantidade" type="number" name="quantidade" value="${prod.quantidade}" required="required"
 						style="width: 8em;" min="1" max="1000">
+					</div>
+					
+					<div class="campo">
+						<label for="ncm">NCM</label>
+						<input id="ncm" type="text" name="ncm" value="${prod.ncm}" required="required"
+						style="width: 8em;" maxlength="8">
+					</div>
+					
+					<div class="campo">
+						<label for="codigobarra">Código de Barras</label>
+						<input id="codigobarra" type="text" name="codigobarra" value="${prod.codigoBarra}" required="required"
+						style="width: 15em;" maxlength="13">
+					</div>
+					
+					<div class="campo">
+						<label for="peso">Peso</label>
+						<input id="peso" type="text" name="peso" value="${prod.peso}" required="required"
+						style="width: 10em;">
 					</div>
 					
 				</fieldset>
@@ -154,7 +178,7 @@
 					<div class="campo">
 						<label for="datacadastro">Data de Cadastro</label>
 						<input id="datacadastro" type="date" name="datacadastro" value="${prod.dataCadastro}" required="required"
-						style="width: 12em;" pattern="dd/MM/yyyy" >
+						style="width: 15em;" pattern="dd/MM/yyyy HH:mm:ss" >
 					</div>	
 				
 				</fieldset>
@@ -245,6 +269,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
+	<script type="text/javascript" src="resources/javascript/jquery.maskMoney.js"></script>
 	
 	<script type="text/javascript">
 	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
@@ -252,7 +277,9 @@
 	});
 
 	$(document).ready(function() {
-    	$("#valor").mask('###.###.##0,00', {reverse: true});	
+    	$("input.valor").maskMoney({showSymbol: false, decimal:",", thousands:"."});	
+    	$("input.valorVenda").maskMoney({showSymbol: false, decimal:",", thousands:"."});	
+    	$("#peso").mask('###.##0,000', {reverse: false});	
 	});
 	
 	</script>

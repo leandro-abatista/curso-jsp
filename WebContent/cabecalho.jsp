@@ -45,7 +45,7 @@
 			
 			<li><a href="#" class="consultas">Consulta<span class="material-icons seta2">arrow_right</span></a>
 				<ul class="itensConsulta">
-					<li><a href="consultaUserServlet?acao=listarTodos">Usuários</</a></li>
+					<li><a href="consultaUserServlet?acao=listarTodos">Usuários</a></li>
 				</ul>
 			</li>
 			

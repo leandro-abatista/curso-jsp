@@ -18,6 +18,11 @@ public class ProdutoBean implements Serializable {
 	private Long codigo_unidmedida;
 	private Long codigo_forn;
 
+	private Double valorVenda;
+	private Integer ncm;
+	private Long codigoBarra;
+	private Double peso;
+
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -90,5 +95,36 @@ public class ProdutoBean implements Serializable {
 		this.codigo_forn = codigo_forn;
 	}
 
-	
+	public Double getValorVenda() {
+		return valorVenda;
+	}
+
+	public void setValorVenda(Double valorVenda) {
+		this.valorVenda = valorVenda;
+	}
+
+	public Integer getNcm() {
+		return ncm;
+	}
+
+	public void setNcm(Integer ncm) {
+		this.ncm = ncm;
+	}
+
+	public Long getCodigoBarra() {
+		return codigoBarra;
+	}
+
+	public void setCodigoBarra(Long codigoBarra) {
+		this.codigoBarra = codigoBarra;
+	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
 }

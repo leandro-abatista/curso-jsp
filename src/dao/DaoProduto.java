@@ -25,8 +25,8 @@ public class DaoProduto {
 		try {
 			
 			String sql = "INSERT INTO public.produto( " 
-					+ "    nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn) " 
-					+ "    VALUES (?, ?, ?, ?, ?, ?, ?);";
+					+ "    nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn, valorvenda, ncm, codigobarra, peso) " 
+					+ "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, produtoBean.getNome());
 			ps.setDouble(2, produtoBean.getValor());
@@ -35,6 +35,10 @@ public class DaoProduto {
 			ps.setLong(5, produtoBean.getCodigo_cat());
 			ps.setLong(6, produtoBean.getCodigo_unidmedida());
 			ps.setLong(7, produtoBean.getCodigo_forn());
+			ps.setDouble(8, produtoBean.getValorVenda());
+			ps.setInt(9, produtoBean.getNcm());
+			ps.setLong(10, produtoBean.getCodigoBarra());
+			ps.setDouble(11, produtoBean.getPeso());
 			
 			ps.execute();
 			connection.commit();
@@ -54,7 +58,7 @@ public class DaoProduto {
 		try {
 			List<ProdutoBean> listar = new ArrayList<ProdutoBean>();
 			
-			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn " + 
+			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn, valorvenda, ncm, codigobarra, peso " + 
 					"  FROM public.produto ORDER BY codigo;";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -69,6 +73,10 @@ public class DaoProduto {
 				produtoBean.setCodigo_cat(rs.getLong("codigo_cat"));
 				produtoBean.setCodigo_unidmedida(rs.getLong("codigo_unidmedida"));
 				produtoBean.setCodigo_forn(rs.getLong("codigo_forn"));
+				produtoBean.setValorVenda(rs.getDouble("valorvenda"));
+				produtoBean.setNcm(rs.getInt("ncm"));
+				produtoBean.setCodigoBarra(rs.getLong("codigobarra"));
+				produtoBean.setPeso(rs.getDouble("peso"));
 				
 				listar.add(produtoBean);
 			}
@@ -84,7 +92,7 @@ public class DaoProduto {
 	public ProdutoBean consultarProduto(Long codigo) {
 		try {
 			
-			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn " + 
+			String sql = "SELECT codigo, nome, valor, quantidade, datacadastro, codigo_cat, codigo_unidmedida, codigo_forn, valorvenda, ncm, codigobarra, peso " + 
 					"   FROM public.produto WHERE codigo = '" + codigo + "';";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -99,6 +107,10 @@ public class DaoProduto {
 				produtoBean.setCodigo_cat(rs.getLong("codigo_cat"));
 				produtoBean.setCodigo_unidmedida(rs.getLong("codigo_unidmedida"));
 				produtoBean.setCodigo_forn(rs.getLong("codigo_forn"));
+				produtoBean.setValorVenda(rs.getDouble("valorvenda"));
+				produtoBean.setNcm(rs.getInt("ncm"));
+				produtoBean.setCodigoBarra(rs.getLong("codigobarra"));
+				produtoBean.setPeso(rs.getDouble("peso"));
 				
 				return produtoBean;
 			}
@@ -107,6 +119,77 @@ public class DaoProduto {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void update(ProdutoBean produtoBean) {
+		try {
+			
+			String sql = "UPDATE public.produto" + 
+					"   SET codigo=?, nome=?, valor=?, quantidade=?, datacadastro=?, codigo_cat=?, codigo_unidmedida=?, codigo_forn=?, valorvenda=?, ncm=?, codigobarra=?, peso=? " + 
+					" 	WHERE codigo = '" + produtoBean.getCodigo() + "'";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setLong(1, produtoBean.getCodigo());
+			ps.setString(2, produtoBean.getNome());
+			ps.setDouble(3, produtoBean.getValor());
+			ps.setInt(4, produtoBean.getQuantidade());
+			ps.setDate(5, new Date(produtoBean.getDataCadastro().getTime()));
+			ps.setLong(6, produtoBean.getCodigo_cat());
+			ps.setLong(7, produtoBean.getCodigo_unidmedida());
+			ps.setLong(8, produtoBean.getCodigo_forn());
+			ps.setDouble(9, produtoBean.getValorVenda());
+			ps.setInt(10, produtoBean.getNcm());
+			ps.setLong(11, produtoBean.getCodigoBarra());
+			ps.setDouble(12, produtoBean.getPeso());
+			
+			ps.executeUpdate();
+			connection.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			try {
+				connection.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	public void delete(Long codigo) {
+		try {
+			
+			String sql = "DELETE FROM public.produto" + 
+					" WHERE codigo = '" + codigo + "';";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			try {
+				connection.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	public boolean verificarNomePro(String nome) {
+		try {
+			
+			String sql = "SELECT COUNT(1) AS qtd FROM produto WHERE nome = '" + nome + "';";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt("qtd") <= 0;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	/**
@@ -206,73 +289,6 @@ public class DaoProduto {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	public void update(ProdutoBean produtoBean) {
-		try {
-			
-			String sql = "UPDATE public.produto" + 
-					"   SET codigo=?, nome=?, valor=?, quantidade=?, datacadastro=?, codigo_cat=?, codigo_unidmedida=?, codigo_forn=? " + 
-					" 	WHERE codigo = '" + produtoBean.getCodigo() + "'";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setLong(1, produtoBean.getCodigo());
-			ps.setString(2, produtoBean.getNome());
-			ps.setDouble(3, produtoBean.getValor());
-			ps.setInt(4, produtoBean.getQuantidade());
-			ps.setDate(5, new Date(produtoBean.getDataCadastro().getTime()));
-			ps.setLong(6, produtoBean.getCodigo_cat());
-			ps.setLong(7, produtoBean.getCodigo_unidmedida());
-			ps.setLong(8, produtoBean.getCodigo_forn());
-			
-			ps.executeUpdate();
-			connection.commit();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-			try {
-				connection.rollback();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-	}
-	
-	public void delete(Long codigo) {
-		try {
-			
-			String sql = "DELETE FROM public.produto" + 
-					" WHERE codigo = '" + codigo + "';";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.execute();
-			connection.commit();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-			try {
-				connection.rollback();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-	}
-	
-	public boolean verificarNomePro(String nome) {
-		try {
-			
-			String sql = "SELECT COUNT(1) AS qtd FROM produto WHERE nome = '" + nome + "';";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			
-			if (rs.next()) {
-				return rs.getInt("qtd") <= 0;
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 
 }

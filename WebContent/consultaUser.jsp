@@ -84,17 +84,6 @@
 
 		</form>
 		
-		<form id="formPesquisa" action="servletPesquisa" method="post">
-			
-			<div class="div-pesquisa">
-			
-				<input class="textobusca" type="text" id="descricao" name="descricao" placeholder="Buscar...">
-				<button class="btnPesquisar" type="submit" value="Pesquisar">Pesquisar</button>
-			
-			</div>
-			
-		</form>
-		
 	</div>
 	
 </body>

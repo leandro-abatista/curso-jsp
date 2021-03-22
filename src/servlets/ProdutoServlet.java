@@ -13,11 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DaoCategoria;
-import dao.DaoFornecedor;
 import dao.DaoProduto;
-import dao.DaoUnidadeMedida;
-import model.classes.beans.CategoriaBean;
 import model.classes.beans.ProdutoBean;
 
 @WebServlet("/produtoServlet")
@@ -68,6 +64,10 @@ public class ProdutoServlet extends HttpServlet {
 		String fornecedor = request.getParameter("fornecedor");
 		String categoria = request.getParameter("categoria");
 		String unimedida = request.getParameter("unimedida");
+		String valorVenda = request.getParameter("valorVenda");
+		String ncm = request.getParameter("ncm");
+		String codigobarra = request.getParameter("codigobarra");
+		String peso = request.getParameter("peso");
 		
 		ProdutoBean produtoBean = new ProdutoBean();
 		produtoBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
@@ -77,7 +77,6 @@ public class ProdutoServlet extends HttpServlet {
 		if (valor != null && !valor.isEmpty()) {
 			String valorParce = valor.replaceAll("\\.", "").replaceAll("\\,", ".");
 			produtoBean.setValor(Double.parseDouble(valorParce));
-			
 		}
 		
 		produtoBean.setQuantidade(Integer.parseInt(quantidade));
@@ -92,6 +91,21 @@ public class ProdutoServlet extends HttpServlet {
 		produtoBean.setCodigo_forn(Long.parseLong(fornecedor));
 		produtoBean.setCodigo_cat(Long.parseLong(categoria));
 		produtoBean.setCodigo_unidmedida(Long.parseLong(unimedida));
+		
+		/* conversão de ponto por vírgula*/
+		if (valorVenda != null && !valorVenda.isEmpty()) {
+			String valorVendaParce = valorVenda.replaceAll("\\.", "").replaceAll("\\,", ".");
+			produtoBean.setValorVenda(Double.parseDouble(valorVendaParce));
+		}
+		
+		produtoBean.setNcm(Integer.parseInt(ncm));
+		produtoBean.setCodigoBarra(Long.parseLong(codigobarra));
+		
+		/* conversão de ponto por vírgula*/
+		if (peso != null && !peso.isEmpty()) {
+			String pesoParce = peso.replaceAll("\\.", "").replaceAll("\\,", ".");
+			produtoBean.setPeso(Double.parseDouble(pesoParce));
+		}
 		
 		String mensagem = null;
 		boolean podeInserir = true;

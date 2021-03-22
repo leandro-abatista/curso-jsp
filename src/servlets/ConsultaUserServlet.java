@@ -24,10 +24,6 @@ public class ConsultaUserServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String acao = request.getParameter("acao");
 		
 		if (acao != null && acao.equalsIgnoreCase("listarTodos")) {
@@ -35,6 +31,10 @@ public class ConsultaUserServlet extends HttpServlet {
 			request.setAttribute("usuarios", daoUsuario.listarTodosUsuarios());
 			dispatcher.forward(request, response);
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

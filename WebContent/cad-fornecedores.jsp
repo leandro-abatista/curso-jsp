@@ -192,7 +192,7 @@
 							</span>
 						</a>
 						
-						<a type="button" class="botao" data-toggle="modal" data-target="#modalDet" 
+						<a type="button" id="visualizar" class="botao" data-toggle="modal" data-target="#mymodal" 
 						href="fornecedorServlet?acao=visualizar&forn=${forn.codigo}">
 							<span class="material-icons">
 								assignment
@@ -239,9 +239,10 @@
 		
 	</div>
 	
+	
 	<!-- início modal -->
 	<div class="modal fade bd-example-modal-lg" 
-		id="modalDet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 				
@@ -257,7 +258,7 @@
 						
 					<div class="modal-body">
 							
-						
+						Código: <c:out value="${forn.codigo}"></c:out>
 							
 					</div>
 						
@@ -269,14 +270,13 @@
 		</div>
 	</div>
 	<!-- fim modal -->
-	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
 	
 	<script type="text/javascript">
-	
+
 		$(document).ready(function() { // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
 			$("div.msg").fadeIn(300).delay(2500).fadeOut(400);
 		});
