@@ -155,91 +155,124 @@
 
 		</form>
 		
-		<table class="table" cellpadding="0" cellspacing="0">
-		<thead>
-			<tr>
-				<th width="8%">CÓDIGO</th>
-				<th width="30%">RAZÃO SOCIAL</th>
-				<th width="15%">CNPJ</th>
-				<th width="15%">INSC. ESTADUAL</th>
-				<th width="15%">DATA DE CADASTRO</th>
-				<th align="center" width="15%">AÇÃO</th>
-			</tr>
-		</thead>
-			
-		<c:forEach items="${fornecedores}" var="forn">
-		
-			<tbody>
-			
-				<tr>
-				
-					<td width="8%"><c:out value="${forn.codigo}"/></td>
-					<td width="30%"><c:out value="${forn.razaoSocial}"/></td>
-					<td width="15%"><c:out value="${forn.cnpj}"/></td>
-					<td width="15%"><c:out value="${forn.inscricaoEstadual}"/></td>
-					<td width="15%"><fmt:formatDate value="${forn.dataCadastro}" pattern="dd-MM-yyyy" /></td>
-					
-					<td align="right" width="15%">
-						<a type="button" id="edit" class="botao edit" href="fornecedorServlet?acao=update&forn=${forn.codigo}">
-							<span class="material-icons">
-								edit
-							</span>
-						</a>
-						
-						<a type="button" id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${forn.codigo}">
-							<span class="material-icons">
-								delete
-							</span>
-						</a>
-						
-						<a type="button" id="visualizar" class="botao" data-toggle="modal" data-target="#mymodal" 
-						href="fornecedorServlet?acao=visualizar&forn=${forn.codigo}">
-							<span class="material-icons">
-								assignment
-							</span>
-						</a>
-						
-					</td>
-					
-				</tr>
-				
-			</tbody>
-
-			<!-- Início Modal de confirmação de exclusão de registro -->
-			<div class="modal modal-danger fade" id="${forn.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog  modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-		
-							<h5 class="modal-title" id="TituloModalCentralizado">Confirmar exclusão</h5>
-		
-							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-								<span aria-hidden="true">&times;</span>
-							</button>
-		
-						</div>
-		
-						<div class="modal-body">
-							<h6>Deseja excluir o registro <c:out value="${forn.codigo}"/> ?</h6>
-						</div>
-		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-							<a type="submit" class="btn btn-warning" href="fornecedorServlet?acao=delete&forn=${forn.codigo}">Excluir</a>
-						</div>
-								
-					</div>
-				</div>
-			</div>
-			<!-- Fim do Modal de confirmação de exclusão de registro -->
-			
-		</c:forEach>
-		
-		</table>
-		
 	</div>
-	
-	
+
+	<section>
+
+		<div class="caption">Fornecedores Cadastrados</div>
+
+		<div class="tbl-header">
+
+			<table>
+
+				<thead>
+
+					<tr>
+						<th width="8%">CÓDIGO</th>
+						<th width="30%">RAZÃO SOCIAL</th>
+						<th width="15%">CNPJ</th>
+						<th width="15%">INSC. ESTADUAL</th>
+						<th width="15%">DATA DE CADASTRO</th>
+						<th align="center" width="15%">AÇÃO</th>
+					</tr>
+
+				</thead>
+
+			</table>
+
+		</div>
+
+		<div class="tbl-content">
+
+			<table>
+
+				<tbody>
+
+					<c:forEach items="${fornecedores}" var="forn">
+
+						<tbody>
+
+							<tr>
+
+								<td width="8%"><c:out value="${forn.codigo}" /></td>
+								<td width="30%"><c:out value="${forn.razaoSocial}" /></td>
+								<td width="15%"><c:out value="${forn.cnpj}" /></td>
+								<td width="15%"><c:out value="${forn.inscricaoEstadual}" /></td>
+								<td width="15%"><fmt:formatDate
+										value="${forn.dataCadastro}" pattern="dd-MM-yyyy" /></td>
+
+								<td align="right" width="15%">
+								
+								<a type="button" id="edit"
+									class="botao edit"
+									href="fornecedorServlet?acao=update&forn=${forn.codigo}"> <span
+										class="material-icons"> edit </span>
+								</a> 
+								
+								<a type="button" id="delete" class="botao delete" href="#"
+									data-toggle="modal" data-target="#${forn.codigo}"> <span
+										class="material-icons"> delete_forever </span>
+								</a> 
+								
+								<a type="button" id="visualizar" class="botao"
+									data-toggle="modal" data-target="#mymodal"
+									href="fornecedorServlet?acao=visualizar&forn=${forn.codigo}">
+										<span class="material-icons"> assignment </span>
+								</a>
+								
+								</td>
+
+							</tr>
+
+						</tbody>
+
+						<!-- Início Modal de confirmação de exclusão de registro -->
+						<div class="modal modal-danger fade" id="${forn.codigo}"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog  modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+
+										<h5 class="modal-title" id="TituloModalCentralizado">Confirmar
+											exclusão</h5>
+
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Fechar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+
+									</div>
+
+									<div class="modal-body">
+										<h6>
+											Deseja excluir o registro
+											<c:out value="${forn.codigo}" />
+											?
+										</h6>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancelar</button>
+										<a type="submit" class="btn btn-warning"
+											href="fornecedorServlet?acao=delete&forn=${forn.codigo}">Excluir</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- Fim do Modal de confirmação de exclusão de registro -->
+
+					</c:forEach>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</section>
+
 	<!-- início modal -->
 	<div class="modal fade bd-example-modal-lg" 
 		id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

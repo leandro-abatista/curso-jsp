@@ -194,85 +194,119 @@
 			
 		</form>
 		
-		<table class="table" cellpadding="0" cellspacing="0">
-		<caption>Registros de Produtos Cadastrados</caption>
-		<thead>
-			<tr>
-				<th width="8%">CÓDIGO</th>
-				<th width="30%">ITEM</th>
-				<th width="15%">VALOR</th>
-				<th width="15%">ESTOQUE</th>
-				<th width="15%">DATA DE CADASTRO</th>
-				<th align="center" width="12%">AÇÃO</th>
-			</tr>
-		</thead>
-			
-		<c:forEach items="${produtos}" var="prod">
-			<tbody>
-				<tr>
-					<td width="8%"><c:out value="${prod.codigo}"/></td>
-					<td width="30%"><c:out value="${prod.nome}"/></td>
-					<td width="15%"><fmt:formatNumber value="${prod.valor}" pattern="#,#00.00"/></td>
-					<td width="15%"><c:out value="${prod.quantidade}"/></td>
-					<td width="15%"><fmt:formatDate value="${prod.dataCadastro}" pattern="dd-MM-yyyy" /></td>
-					
-					<td align="center" width="12%">
-						<a id="edit" type="button" class="botao edit" href="produtoServlet?acao=update&prod=${prod.codigo}">
-							<span class="material-icons">
-								edit
-							</span>
-						</a>
-						
-						<a id="delete" type="button" class="botao delete" href="#" data-toggle="modal" data-target="#${prod.codigo}">
-							<span class="material-icons">
-								delete
-							</span>
-						</a>
-					</td>
-				</tr>
-			</tbody>
-			
-			<!-- Início Modal de confirmação de exclusão de registro -->
-			<div class="modal modal-danger fade" id="${prod.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog  modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-		
-							<h5 class="modal-title" id="TituloModalCentralizado">Confirmar exclusão</h5>
-		
-							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-								<span aria-hidden="true">&times;</span>
-							</button>
-		
-						</div>
-		
-						<div class="modal-body">
-							<h6>Deseja excluir o produto <c:out value="${prod.nome}"/> ?</h6>
-						</div>
-		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-							<a type="submit" class="btn btn-warning" href="produtoServlet?acao=delete&prod=${prod.codigo}">Excluir</a>
-						</div>
-								
-					</div>
-				</div>
-			</div>
-			<!-- Fim do Modal de confirmação de exclusão de registro -->
-			
-		</c:forEach>
-	
-	</table>
-	
 	</div>
-	
+
+	<section>
+
+		<div class="caption">Produtos Cadastrados</div>
+
+		<div class="tbl-header">
+
+			<table>
+
+				<thead>
+
+					<tr>
+						<th width="8%">CÓDIGO</th>
+						<th width="30%">ITEM</th>
+						<th width="15%">VALOR</th>
+						<th width="15%">ESTOQUE</th>
+						<th width="15%">DATA DE CADASTRO</th>
+						<th align="center" width="12%">Opção</th>
+					</tr>
+
+				</thead>
+
+			</table>
+
+		</div>
+
+		<div class="tbl-content">
+
+			<table>
+
+				<tbody>
+
+					<c:forEach items="${produtos}" var="prod">
+						<tbody>
+							<tr>
+								<td width="8%"><c:out value="${prod.codigo}" /></td>
+								<td width="30%"><c:out value="${prod.nome}" /></td>
+								<td width="15%"><fmt:formatNumber value="${prod.valor}"
+										pattern="#,#00.00" /></td>
+								<td width="15%"><c:out value="${prod.quantidade}" /></td>
+								<td width="15%"><fmt:formatDate
+										value="${prod.dataCadastro}" pattern="dd-MM-yyyy" /></td>
+
+								<td align="center" width="12%">
+								
+								<a id="edit" type="button" class="botao edit"
+									href="produtoServlet?acao=update&prod=${prod.codigo}"> 
+									<span class="material-icons"> edit </span>
+								</a> 
+								
+								<a id="delete" type="button" class="botao delete" href="#"
+									data-toggle="modal" data-target="#${prod.codigo}"> 
+									<span class="material-icons"> delete_forever </span>
+								</a>
+								
+								</td>
+								
+							</tr>
+							
+						</tbody>
+
+						<!-- Início Modal de confirmação de exclusão de registro -->
+						<div class="modal modal-danger fade" id="${prod.codigo}"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog  modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+
+										<h5 class="modal-title" id="TituloModalCentralizado">Confirmar
+											exclusão</h5>
+
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Fechar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+
+									</div>
+
+									<div class="modal-body">
+										<h6>
+											Deseja excluir o produto <c:out value="${prod.nome}" /> ?
+										</h6>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+										<a type="submit" class="btn btn-warning"
+											href="produtoServlet?acao=delete&prod=${prod.codigo}">Excluir</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- Fim do Modal de confirmação de exclusão de registro -->
+
+					</c:forEach>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</section>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery.maskMoney.js"></script>
 	
 	<script type="text/javascript">
-	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
+	$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA PRONTO
 		 $( "div.msg" ).fadeIn( 300 ).delay( 2500 ).fadeOut( 400 );
 	});
 

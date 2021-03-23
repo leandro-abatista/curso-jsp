@@ -25,7 +25,7 @@
 	<jsp:include page="cabecalho.jsp"/>
 	
 	<div class="div-pai">
-		<p>Cadastro de Categorias</p>
+		<p>Cadastro de Unidades de Medidas</p>
 		
 		<div id="msg" class="msg">
   			<h3>${mensagem}</h3>
@@ -61,82 +61,113 @@
 			<button class="btn submit" type="submit" value="cancelar" onclick="document.getElementById('formulario').reset();">Cancelar</button>
 			
 		</form>
-		
-	<table class="table" cellpadding="0" cellspacing="0">
-		<thead>
-			<tr>
-				<th width="8%">CÓDIGO</th>
-				<th width="8%">SIGLA</th>
-				<th width="20%">DESCRIÇÃO</th>
-				<th align="center" width="15%">AÇÃO</th>
-			</tr>
-		</thead>
-			
-		<c:forEach items="${unimedidas}" var="um">
-		
-			<tbody>
-			
-				<tr>
-				
-					<td width="8%"><c:out value="${um.codigo}"/></td>
-					<td width="8%"><c:out value="${um.sigla}"/></td>
-					<td width="20%"><c:out value="${um.descricao}"/></td>
-					
-					<td align="center" width="15%">
-					
-						<a id="edit" type="button" class="botao edit" href="unidadeMedidaServlet?acao=update&um=${um.codigo}">
-							<span class="material-icons">
-								edit
-							</span>
-						</a>
-						
-						<a id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${um.codigo}">
-							<span class="material-icons">
-								delete
-							</span>
-						</a>
-						
-					</td>
-					
-				</tr>
-				
-			</tbody>
-			
-			<!-- Início Modal de confirmação de exclusão de registro -->
-			<div class="modal modal-danger fade" id="${um.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog  modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-		
-							<h5 class="modal-title" id="TituloModalCentralizado">Confirmar exclusão</h5>
-		
-							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-								<span aria-hidden="true">&times;</span>
-							</button>
-		
-						</div>
-		
-						<div class="modal-body">
-							<h6>Deseja excluir a categoria <c:out value="${um.descricao}"/> ?</h6>
-						</div>
-		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-							<a type="submit" class="btn btn-warning" href="unidadeMedidaServlet?acao=delete&um=${um.codigo}">Excluir</a>
-						</div>
-								
-					</div>
-				</div>
-			</div>
-			<!-- Fim do Modal de confirmação de exclusão de registro -->
-			
-		</c:forEach>
-	
-	</table>
 	
 	</div>
-	
-	
+
+	<section>
+
+		<div class="caption">Unid. Medidas Cadastrados</div>
+
+		<div class="tbl-header">
+
+			<table>
+
+				<thead>
+
+					<tr>
+						<th width="8%">CÓDIGO</th>
+						<th width="8%">SIGLA</th>
+						<th width="20%">DESCRIÇÃO</th>
+						<th align="center" width="15%">Opção</th>
+					</tr>
+
+				</thead>
+
+			</table>
+
+		</div>
+
+		<div class="tbl-content">
+
+			<table>
+
+				<tbody>
+
+					<c:forEach items="${unimedidas}" var="um">
+
+						<tbody>
+
+							<tr>
+
+								<td width="8%"><c:out value="${um.codigo}" /></td>
+								<td width="8%"><c:out value="${um.sigla}" /></td>
+								<td width="20%"><c:out value="${um.descricao}" /></td>
+
+								<td align="center" width="15%">
+								
+								<a id="edit" type="button" class="botao edit"
+									href="unidadeMedidaServlet?acao=update&um=${um.codigo}"> 
+									<span class="material-icons"> edit </span>
+								</a> 
+								
+								<a id="delete" type="button" class="botao delete" href="#"
+									data-toggle="modal" data-target="#${um.codigo}"> <span
+										class="material-icons"> delete_forever </span>
+								</a>
+								
+								</td>
+
+							</tr>
+
+						</tbody>
+
+						<!-- Início Modal de confirmação de exclusão de registro -->
+						<div class="modal modal-danger fade" id="${um.codigo}"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog  modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+
+										<h5 class="modal-title" id="TituloModalCentralizado">Confirmar
+											exclusão</h5>
+
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Fechar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+
+									</div>
+
+									<div class="modal-body">
+										<h6>
+											Deseja excluir a categoria
+											<c:out value="${um.descricao}" />
+											?
+										</h6>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancelar</button>
+										<a type="submit" class="btn btn-warning"
+											href="unidadeMedidaServlet?acao=delete&um=${um.codigo}">Excluir</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- Fim do Modal de confirmação de exclusão de registro -->
+
+					</c:forEach>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</section>
+
 	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
 

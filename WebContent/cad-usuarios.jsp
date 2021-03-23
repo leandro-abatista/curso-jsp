@@ -127,87 +127,117 @@
 			
 		</form>
 		
-	<table class="table" cellpadding="0" cellspacing="0">
-		<thead>
-			<tr>
-				<th width="8%">CÓDIGO</th>
-				<th width="18%">LOGIN</th>
-				<th width="23%">NOME</th>
-				<th width="23%">E-MAIL</th>
-				<th width="18%">TELEFONE</th>
-				<th align="center" width="12%">AÇÃO</th>
-			</tr>
-		</thead>
-			
-		<c:forEach items="${usuarios}" var="usuario">
-		
-			<tbody>
-			
-				<tr>
-				
-					<td width="8%"><c:out value="${usuario.codigo}"/></td>
-					<td width="18%"><c:out value="${usuario.login}"/></td>
-					<td width="23%"><c:out value="${usuario.nome}"/></td>
-					<td width="23%"><c:out value="${usuario.email}"/></td>
-					<td width="18%"><c:out value="${usuario.telefone}"/></td>
-					
-					<td align="center" width="12%">
-						<a id="edit" class="botao edit" href="usuarioServlet?acao=update&user=${usuario.codigo}">
-							<span class="material-icons">
-								edit
-							</span>
-						</a>
-						
-						<a id="delete" class="botao delete" href="#" data-toggle="modal" data-target="#${usuario.codigo}">
-							<span class="material-icons">
-								delete
-							</span>
-						</a>
-						
-						<a id="addCall" class="botao addCall" href="telefonesServlet?acao=addTel&user=${usuario.codigo}">
-							<span class="material-icons">
-								add_ic_call
-							</span>
-						</a>
-					</td>
-					
-				</tr>
-				
-			</tbody>
-			
-			<!-- Início Modal de confirmação de exclusão de registro -->
-			<div class="modal modal-danger fade" id="${usuario.codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog  modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-		
-							<h5 class="modal-title" id="TituloModalCentralizado">Confirmar exclusão</h5>
-		
-							<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-								<span aria-hidden="true">&times;</span>
-							</button>
-		
-						</div>
-		
-						<div class="modal-body">
-							<h6>Deseja excluir o registro <c:out value="${usuario.codigo}"/> ?</h6>
-						</div>
-		
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-							<a type="submit" class="btn btn-warning" href="usuarioServlet?acao=delete&user=${usuario.codigo}">Excluir</a>
-						</div>
-								
-					</div>
-				</div>
-			</div>
-			<!-- Fim do Modal de confirmação de exclusão de registro -->
-			
-		</c:forEach>
-	
-	</table>
-	
 	</div>
+	
+	<section>
+	
+		<div class="caption">Usuários Cadastrados</div>
+	
+		<div class="tbl-header">
+			
+			<table>
+			
+					<thead>
+					
+						<tr>
+							<th style="width: 8%; text-align: left;">Código</th>
+							<th style="width: 30%; text-align: left;">Nome</th>
+							<th style="width: 20%; text-align: left;">Login</th>
+							<th style="width: 25%; text-align: left;">E-mail</th>
+							<th style="width: 15%; text-align: left;">Telefone</th>
+							<th style="width: 15%; text-align: center;">Opção</th>
+						</tr>
+						
+					</thead>
+					
+			</table>
+			
+		</div>
+		
+		<div class="tbl-content">
+		
+			<table>
+			
+				<tbody>
+
+					<c:forEach items="${usuarios}" var="usuario">
+
+						<tbody>
+
+							<tr>
+
+								<td width="8%"><c:out value="${usuario.codigo}" /></td>
+								<td width="23%"><c:out value="${usuario.nome}" /></td>
+								<td width="18%"><c:out value="${usuario.login}" /></td>
+								<td width="23%"><c:out value="${usuario.email}" /></td>
+								<td width="18%"><c:out value="${usuario.telefone}" /></td>
+
+								<td align="center" width="15%">
+								
+								<a id="edit" type="button" class="botao edit" href="usuarioServlet?acao=update&user=${usuario.codigo}">
+							    <span class="material-icons"> edit </span>
+								</a> 
+								
+								<a id="delete" type="button" class="botao delete" href="#" data-toggle="modal" data-target="#${usuario.codigo}"> 
+								<span class="material-icons"> delete_forever </span>
+								</a> 
+								
+								<a id="addCall" type="button" class="botao addCall" href="telefonesServlet?acao=addTel&user=${usuario.codigo}">
+								<span class="material-icons"> add_ic_call </span>
+								</a>
+								
+								</td>
+
+							</tr>
+
+						</tbody>
+
+						<!-- Início Modal de confirmação de exclusão de registro -->
+						<div class="modal modal-danger fade" id="${usuario.codigo}"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog  modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+
+										<h5 class="modal-title" id="TituloModalCentralizado">Confirmar
+											exclusão</h5>
+
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Fechar">
+											<span aria-hidden="true">&times;</span>
+										</button>
+
+									</div>
+
+									<div class="modal-body">
+										<h6>
+											Deseja excluir o registro
+											<c:out value="${usuario.codigo}" />
+											?
+										</h6>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancelar</button>
+										<a type="submit" class="btn btn-warning"
+											href="usuarioServlet?acao=delete&user=${usuario.codigo}">Excluir</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- Fim do Modal de confirmação de exclusão de registro -->
+
+					</c:forEach>
+
+				</tbody>
+		
+			</table>
+		
+		</div>
+		
+	</section>	
 	
 	<script type="text/javascript" src="resources/javascript/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="resources/javascript/jquery.mask.min.js"></script>
