@@ -78,6 +78,8 @@ public class FornecedorServlet extends HttpServlet {
 		String estado = request.getParameter("estado");
 		String ibge = request.getParameter("ibge");
 		
+		String empresa = request.getParameter("empresa");
+		
 		
 		//criando uma nova instância do objeto fornecedor
 		FornecedorBean fornecedorBean = new FornecedorBean();
@@ -103,6 +105,7 @@ public class FornecedorServlet extends HttpServlet {
 		fornecedorBean.setCidade(cidade);
 		fornecedorBean.setEstado(estado);
 		fornecedorBean.setIbge(Integer.parseInt(ibge));
+		fornecedorBean.setEmpresa(empresa);
 		
 		String mensagem = null;
 		boolean podeInserir = true;

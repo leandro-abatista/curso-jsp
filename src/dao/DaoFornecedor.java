@@ -23,8 +23,8 @@ public class DaoFornecedor {
 			
 			String sql = "INSERT INTO public.fornecedor"
 					+ "(razaosocial, nomefantasia, cnpj, inscricaoestadual, inscricaomunicipal, datacadastro, "
-					+ " cep, logradouro, numero, bairro, cidade, estado, ibge)"
-					+ "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					+ " cep, logradouro, numero, bairro, cidade, estado, ibge, empresa)"
+					+ "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, fornecedorBean.getRazaoSocial());
 			ps.setString(2, fornecedorBean.getNomeFantasia());
@@ -39,6 +39,7 @@ public class DaoFornecedor {
 			ps.setString(11, fornecedorBean.getCidade());
 			ps.setString(12, fornecedorBean.getEstado());
 			ps.setInt(13, fornecedorBean.getIbge());
+			ps.setString(14, fornecedorBean.getEmpresa());
 			
 			ps.execute();
 			connection.commit();
@@ -60,7 +61,7 @@ public class DaoFornecedor {
 			List<FornecedorBean> listar = new ArrayList<FornecedorBean>();
 			
 			String sql = "SELECT codigo, razaosocial, nomefantasia, cnpj, inscricaoestadual, inscricaomunicipal, datacadastro, "
-					+ "  cep, logradouro, numero, bairro, cidade, estado, ibge" 
+					+ "  cep, logradouro, numero, bairro, cidade, estado, ibge, empresa " 
 					+ "  FROM public.fornecedor ORDER BY codigo;";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -81,6 +82,7 @@ public class DaoFornecedor {
 				fornecedorBean.setCidade(rs.getString("cidade"));
 				fornecedorBean.setEstado(rs.getString("estado"));
 				fornecedorBean.setIbge(rs.getInt("ibge"));
+				fornecedorBean.setEmpresa(rs.getString("empresa"));
 				
 				listar.add(fornecedorBean);
 			}
@@ -97,7 +99,7 @@ public class DaoFornecedor {
 		try {
 			
 			String sql = "SELECT codigo, razaosocial, nomefantasia, cnpj, inscricaoestadual, inscricaomunicipal, " + 
-					"     datacadastro, cep, logradouro, numero, bairro, cidade, estado, ibge" + 
+					"     datacadastro, cep, logradouro, numero, bairro, cidade, estado, ibge, empresa " + 
 					"     FROM public.fornecedor WHERE codigo = '" + codigo + "';";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -118,6 +120,7 @@ public class DaoFornecedor {
 				fornecedorBean.setCidade(rs.getString("cidade"));
 				fornecedorBean.setEstado(rs.getString("estado"));
 				fornecedorBean.setIbge(rs.getInt("ibge"));
+				fornecedorBean.setEmpresa(rs.getString("empresa"));
 				
 				return fornecedorBean;
 			}
@@ -132,24 +135,25 @@ public class DaoFornecedor {
 		try {
 			
 			String sql = "UPDATE public.fornecedor" + 
-					" SET razaosocial=?, nomefantasia=?, cnpj=?, inscricaoestadual=?, " + 
-					" inscricaomunicipal=?, datacadastro=?, " +
-					" cep=?, logradouro=?, numero=?, bairro=?, cidade=?, estado=?, ibge=? " + 
+					" SET codigo=?, razaosocial=?, nomefantasia=?, cnpj=?, inscricaoestadual=?, inscricaomunicipal=?, datacadastro=?, " +
+					" cep=?, logradouro=?, numero=?, bairro=?, cidade=?, estado=?, ibge=?, empresa=? " + 
 					" WHERE codigo = '" + fornecedorBean.getCodigo() + "'";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, fornecedorBean.getRazaoSocial());
-			ps.setString(2, fornecedorBean.getNomeFantasia());
-			ps.setString(3, fornecedorBean.getCnpj());
-			ps.setString(4, fornecedorBean.getInscricaoEstadual());
-			ps.setString(5, fornecedorBean.getInscricaoMunicipal());
-			ps.setDate(6, new Date(fornecedorBean.getDataCadastro().getTime()));
-			ps.setString(7, fornecedorBean.getCep());
-			ps.setString(8, fornecedorBean.getLogradouro());
-			ps.setString(9, fornecedorBean.getNumero());
-			ps.setString(10, fornecedorBean.getBairro());
-			ps.setString(11, fornecedorBean.getCidade());
-			ps.setString(12, fornecedorBean.getEstado());
-			ps.setInt(13, fornecedorBean.getIbge());
+			ps.setLong(1, fornecedorBean.getCodigo());
+			ps.setString(2, fornecedorBean.getRazaoSocial());
+			ps.setString(3, fornecedorBean.getNomeFantasia());
+			ps.setString(4, fornecedorBean.getCnpj());
+			ps.setString(5, fornecedorBean.getInscricaoEstadual());
+			ps.setString(6, fornecedorBean.getInscricaoMunicipal());
+			ps.setDate(7, new Date(fornecedorBean.getDataCadastro().getTime()));
+			ps.setString(8, fornecedorBean.getCep());
+			ps.setString(9, fornecedorBean.getLogradouro());
+			ps.setString(10, fornecedorBean.getNumero());
+			ps.setString(11, fornecedorBean.getBairro());
+			ps.setString(12, fornecedorBean.getCidade());
+			ps.setString(13, fornecedorBean.getEstado());
+			ps.setInt(14, fornecedorBean.getIbge());
+			ps.setString(15, fornecedorBean.getEmpresa());
 			
 			ps.executeUpdate();
 			connection.commit();

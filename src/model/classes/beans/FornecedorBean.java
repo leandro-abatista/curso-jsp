@@ -14,6 +14,7 @@ public class FornecedorBean implements Serializable {
 	private String inscricaoEstadual;
 	private String inscricaoMunicipal;
 	private Date dataCadastro;
+	private String empresa;
 
 	// dados do endereço
 	private String cep;
@@ -136,4 +137,13 @@ public class FornecedorBean implements Serializable {
 		this.ibge = ibge;
 	}
 
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	
 }

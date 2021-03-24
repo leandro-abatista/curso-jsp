@@ -11,7 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 import connection.SingleConnection;
-import sun.util.logging.resources.logging;
 
 @WebFilter(urlPatterns = {"/*"})
 public class Filter implements javax.servlet.Filter {

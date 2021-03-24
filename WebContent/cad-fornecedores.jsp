@@ -1,3 +1,5 @@
+<%@page import="model.classes.beans.FornecedorBean"%>
+<%@page import="model.classes.beans.UsuarioBean"%>
 <jsp:useBean id="beanJsp" class="model.classes.beans.FornecedorBean" type="model.classes.beans.FornecedorBean"/>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -91,6 +93,48 @@
 						<input id="datacadastro" type="date" name="datacadastro" value="${forn.dataCadastro}" required="required"
 						style="width: 12em;" pattern="dd/MM/yyyy" >
 					</div>	
+					
+					<div class="campo">
+
+						<label>Empresa</label>
+						<label class="checkbox"> 
+							<input type="radio" name="empresa" value="Matriz"
+								<%
+								
+									if (request.getAttribute("forn") != null) {
+										FornecedorBean fornBean = (FornecedorBean) request.getAttribute("forn");
+											if (fornBean.getEmpresa().equalsIgnoreCase("Matriz")) {
+												out.print(" ");
+												out.print("checked=\"checked\"");
+												out.print(" ");
+											}
+									}
+								
+								%>
+							> Matriz
+							
+						</label> 
+						
+						<label class="checkbox"> 
+							<input type="radio" name="empresa" value="Filial"
+							
+								<%
+							
+									if (request.getAttribute("forn") != null) {
+										FornecedorBean fornBean = (FornecedorBean) request.getAttribute("forn");
+											if (fornBean.getEmpresa().equalsIgnoreCase("Filial")) {
+												out.print(" ");
+												out.print("checked=\"checked\"");
+												out.print(" ");
+											}
+									}
+							
+								%>
+							
+							> Filial
+						</label>
+
+					</div>
 				
 				</fieldset>
 				

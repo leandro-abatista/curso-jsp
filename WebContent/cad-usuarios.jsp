@@ -117,11 +117,43 @@
 					<div class="campo">
 						
 						<label for="perfil">Perfil</label>
-						<select id="perfil" name="perfil">
+						<select id="perfil" name="perfil" required="required">
 						
 							<option selected="selected" disabled="disabled">Selecione</option>
-							<option value="Administrador">Administrador</option>
-							<option value="Usuário">Usuário</option>
+							
+							<option value="Administrador"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getPerfil().equalsIgnoreCase("Administrador")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Administrador</option>
+							
+							<option value="Usuário"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getPerfil().equalsIgnoreCase("Usuário")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>							
+							
+							>Usuário</option>
 						
 						</select>
 					
@@ -130,15 +162,111 @@
 					<div class="campo">
 						
 						<label for="departamento">Departamento</label>
-						<select id="departamento" name="departamento">
+						<select id="departamento" name="departamento" required="required">
 						
 							<option selected="selected" disabled="disabled">Selecione</option>
-							<option value="Rercursos Humanos">Rercursos Humanos</option>
-							<option value="Administrativo">Administrativo</option>
-							<option value="Financeiro">Financeiro</option>
-							<option value="Comercial">Comercial</option>
-							<option value="Tecnologia da Informação">Tecnologia da Informação</option>
-							<option value="Operacional">Operacional</option>
+							
+							<option value="Rercursos Humanos"
+								
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getDepartamento().equalsIgnoreCase("Rercursos Humanos")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Rercursos Humanos</option>
+							
+							<option value="Administrativo"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getDepartamento().equalsIgnoreCase("Administrativo")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Administrativo</option>
+							
+							<option value="Financeiro"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getDepartamento().equalsIgnoreCase("Financeiro")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Financeiro</option>
+							
+							<option value="Comercial"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getDepartamento().equalsIgnoreCase("Comercial")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+								
+							>Comercial</option>
+							
+							<option value="Tecnologia da Informação"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getDepartamento().equalsIgnoreCase("Tecnologia da Informação")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Tecnologia da Informação</option>
+							
+							<option value="Operacional"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getDepartamento().equalsIgnoreCase("Operacional")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Operacional</option>
 						
 						</select>
 					
@@ -147,15 +275,145 @@
 					<div class="campo">
 						
 						<label for="cargo">Cargo</label>
-						<select id="cargo" name="cargo">
+						<select id="cargo" name="cargo" required="required">
 						
 							<option selected="selected" disabled="disabled">Selecione</option>
-							<option value="Gerente Administrativo">Gerente Administrativo</option>
-							<option value="Auxiliar Administrativo">Auxiliar Administrativo</option>
-							<option value="Diretor Administrativo">Diretor Administrativo</option>
-							<option value="Diretor Executivo">Diretor Executivo</option>
-							<option value="Gerente de TI">Gerente de TI</option>
-							<option value="Auxiliar de TI">Auxiliar de TI</option>
+							
+							<option value="Gerente Administrativo"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Gerente Administrativo")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Gerente Administrativo</option>
+							
+							<option value="Auxiliar Administrativo"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Auxiliar Administrativo")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Auxiliar Administrativo</option>
+							
+							<option value="Gerente Financeiro"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Gerente Financeiro")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Diretor Administrativo</option>
+							
+							<option value="Auxiliar Financeiro"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Auxiliar Financeiro")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Diretor Administrativo</option>
+							
+							<option value="Diretor Administrativo"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Diretor Administrativo")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Diretor Administrativo</option>
+							
+							<option value="Diretor Executivo"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Diretor Executivo")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Diretor Executivo</option>
+							
+							<option value="Gerente de TI"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Gerente de TI")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Gerente de TI</option>
+							
+							<option value="Auxiliar de TI"
+							
+								<%
+									
+									if(request.getAttribute("user") != null){
+										UsuarioBean userBean = (UsuarioBean) request.getAttribute("user");
+										if(userBean.getCargo().equalsIgnoreCase("Auxiliar de TI")){
+											out.print(" ");
+											out.print("selected=\"selected\"");
+											out.print(" ");
+										}
+									}
+								
+								%>
+							
+							>Auxiliar de TI</option>
 						
 						</select>
 					

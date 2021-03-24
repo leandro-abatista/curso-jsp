@@ -108,7 +108,8 @@ public class DaoUsuario {
 	public UsuarioBean consultarCodigo(Long codigo) {
 		try {
 			
-			String sql = "SELECT codigo, nome, cpf, login, senha, telefone, email, ativo, perfil "
+			String sql = "SELECT codigo, nome, cpf, login, senha, telefone, email, ativo, "
+					+ " perfil, departamento, cargo "
 					+ " FROM public.usuario "
 					+ " WHERE codigo = '" + codigo + "'";
 			PreparedStatement ps = connection.prepareStatement(sql);
