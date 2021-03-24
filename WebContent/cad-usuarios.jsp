@@ -114,6 +114,53 @@
 						>
 					</div>
 					
+					<div class="campo">
+						
+						<label for="perfil">Perfil</label>
+						<select id="perfil" name="perfil">
+						
+							<option selected="selected" disabled="disabled">Selecione</option>
+							<option value="Administrador">Administrador</option>
+							<option value="Usuário">Usuário</option>
+						
+						</select>
+					
+					</div>
+					
+					<div class="campo">
+						
+						<label for="departamento">Departamento</label>
+						<select id="departamento" name="departamento">
+						
+							<option selected="selected" disabled="disabled">Selecione</option>
+							<option value="Rercursos Humanos">Rercursos Humanos</option>
+							<option value="Administrativo">Administrativo</option>
+							<option value="Financeiro">Financeiro</option>
+							<option value="Comercial">Comercial</option>
+							<option value="Tecnologia da Informação">Tecnologia da Informação</option>
+							<option value="Operacional">Operacional</option>
+						
+						</select>
+					
+					</div>
+					
+					<div class="campo">
+						
+						<label for="cargo">Cargo</label>
+						<select id="cargo" name="cargo">
+						
+							<option selected="selected" disabled="disabled">Selecione</option>
+							<option value="Gerente Administrativo">Gerente Administrativo</option>
+							<option value="Auxiliar Administrativo">Auxiliar Administrativo</option>
+							<option value="Diretor Administrativo">Diretor Administrativo</option>
+							<option value="Diretor Executivo">Diretor Executivo</option>
+							<option value="Gerente de TI">Gerente de TI</option>
+							<option value="Auxiliar de TI">Auxiliar de TI</option>
+						
+						</select>
+					
+					</div>
+					
 				</fieldset>
 				
 					

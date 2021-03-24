@@ -65,6 +65,9 @@ public class UsuarioServlet extends HttpServlet {
 		String cpf = request.getParameter("cpf");
 		String telefone = request.getParameter("telefone");
 		String email = request.getParameter("email");
+		String perfil = request.getParameter("perfil");
+		String departamento = request.getParameter("departamento");
+		String cargo = request.getParameter("cargo");
 
 		UsuarioBean usuarioBean = new UsuarioBean();
 		usuarioBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
@@ -80,6 +83,10 @@ public class UsuarioServlet extends HttpServlet {
 		} else {
 			usuarioBean.setAtivo(false);
 		}
+		
+		usuarioBean.setPerfil(perfil);
+		usuarioBean.setDepartamento(departamento);
+		usuarioBean.setCargo(cargo);
 
 		String mensagem = null;
 		boolean podeInserir = true;

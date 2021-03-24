@@ -9,4 +9,9 @@
   	<filter-name>filter</filter-name>
   	<filter-class>filter.Filter</filter-class>
   </filter>
+  
+  <error-page>
+  	<exception-type>java.lang.Exception</exception-type>
+  	<location>/erro.jsp</location>
+  </error-page>
 </web-app>

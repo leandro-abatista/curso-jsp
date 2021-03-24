@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 import connection.SingleConnection;
+import sun.util.logging.resources.logging;
 
 @WebFilter(urlPatterns = {"/*"})
 public class Filter implements javax.servlet.Filter {
@@ -19,7 +20,6 @@ public class Filter implements javax.servlet.Filter {
 
 	@Override
 	public void destroy() {
-		
 	}
 	
 	@Override
@@ -34,8 +34,8 @@ public class Filter implements javax.servlet.Filter {
 			
 			try {
 				connection.rollback();
-			} catch (Exception x) {
-				x.printStackTrace();
+			} catch (Exception ex) {
+				throw new ServletException("Erro: " + ex.getMessage());
 			}
 		}
 		
@@ -44,7 +44,6 @@ public class Filter implements javax.servlet.Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		connection = SingleConnection.getConnection();
-		
 	}
 
 }

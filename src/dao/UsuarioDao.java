@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletException;
+
 import connection.SingleConnection;
 import model.classes.beans.UsuarioBean;
 
@@ -21,7 +23,7 @@ public class UsuarioDao {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public UsuarioBean validarUsuario(UsuarioBean usuarioBean) {
+	public UsuarioBean validarUsuario(UsuarioBean usuarioBean) throws ServletException {
 		try {
 			String sql = "select * from usuario where login = ? AND senha = ?;";
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -38,6 +40,7 @@ public class UsuarioDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ServletException(e.getMessage());
 		}
 		return null; 
 	}

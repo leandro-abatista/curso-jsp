@@ -14,6 +14,9 @@ public class UsuarioBean implements Serializable {
 	private String telefone;
 	private String email;
 	private boolean ativo;
+	private String perfil;
+	private String departamento;
+	private String cargo;
 	
 
 	public Long getCodigo() {
@@ -80,4 +83,29 @@ public class UsuarioBean implements Serializable {
 		this.ativo = ativo;
 	}
 
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	
 }
